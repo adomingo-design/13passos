@@ -170,41 +170,23 @@
             gap: 20px;
         }
 
-       .home-intro {
-    padding: 10px 6px 6px 6px;
-}
-
-.home-intro h1 {
-    font-family: 'Varela Round';
-    color: var(--cep-black);
-    margin: 0 0 18px 0;
-    font-size: 2.35rem;
-    line-height: 1.08;
-    letter-spacing: 0.2px;
-}
-
-.home-intro p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 820px;
-}
         .pillars-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
- .pillar-card {
-    border-radius: 24px;
-    padding: 26px 22px 22px 22px;
-    color: white;
-    box-shadow: var(--shadow);
-    min-height: 290px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+        .pillar-card {
+            border-radius: 24px;
+            padding: 26px 22px 22px 22px;
+            color: white;
+            box-shadow: var(--shadow);
+            min-height: 290px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         .pillar-para {
             background: linear-gradient(135deg, #D8262E 0%, #a91d23 100%);
         }
@@ -217,15 +199,16 @@
             background: linear-gradient(135deg, #009ABE 0%, #00738d 100%);
         }
 
-.pillar-top small {
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 1.1px;
-    font-weight: 700;
-    opacity: 0.92;
-    margin-bottom: 12px;
-    color: rgba(255,255,255,0.9);
-}
+        .pillar-top small {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            font-weight: 700;
+            opacity: 0.92;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.9);
+        }
+
         .pillar-title {
             font-family: 'Varela Round';
             font-size: 2.15rem;
@@ -235,13 +218,14 @@
             letter-spacing: 0.3px;
         }
 
-.pillar-desc {
-    margin: 0;
-    line-height: 1.65;
-    font-size: 0.98rem;
-    color: rgba(255,255,255,0.96);
-    max-width: 34ch;
-}
+        .pillar-desc {
+            margin: 0;
+            line-height: 1.65;
+            font-size: 0.98rem;
+            color: rgba(255,255,255,0.96);
+            max-width: 34ch;
+        }
+
         .pillar-links {
             display: flex;
             flex-wrap: wrap;
@@ -249,38 +233,35 @@
             margin-top: 18px;
         }
 
-      .pillar-link {
-    border: 1px solid rgba(255,255,255,0.30);
-    background: rgba(255,255,255,0.10);
-    color: white;
-    border-radius: 999px;
-    padding: 9px 14px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s, transform 0.15s, border-color 0.15s;
-}
-
-.pillar-link:hover {
-    background: rgba(255,255,255,0.18);
-    border-color: rgba(255,255,255,0.45);
-    transform: translateY(-1px);
-}
-
-        .home-footer-note {
-            background: #fff;
-            border: 1px solid #e7edf3;
-            border-radius: 18px;
-            padding: 16px 18px;
-            font-size: 0.9rem;
-            line-height: 1.55;
+        .pillar-link {
+            border: 1px solid rgba(255,255,255,0.30);
+            background: rgba(255,255,255,0.10);
+            color: white;
+            border-radius: 999px;
+            padding: 9px 14px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s, transform 0.15s, border-color 0.15s;
         }
 
-        /* SITUACIONS */
+        .pillar-link:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.45);
+            transform: translateY(-1px);
+        }
+
+        /* TARGETES VISUALS */
         .diag-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 12px;
         }
 
@@ -298,7 +279,7 @@
 
         .diag-item:hover {
             border-color: var(--cep-orange);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .diag-item strong {
@@ -324,6 +305,18 @@
             justify-content: center;
             border-radius: 8px;
             flex-shrink: 0;
+        }
+
+        .section-stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .section-subintro {
+            margin-top: -4px;
+            margin-bottom: 0;
+            font-size: 0.92rem;
+            color: #64748b;
         }
 
         .ic-red { background: #fff1f1; color: var(--cep-red); }
@@ -439,7 +432,7 @@
             color: var(--cep-blue);
         }
 
-        /* DETALLE DE ETAPAS */
+        /* DETALL DEL MODAL */
         .details-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -531,6 +524,36 @@
 
         .mini-badge i {
             font-size: 0.78rem;
+        }
+
+        .method-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border: 1px solid;
+            white-space: nowrap;
+        }
+
+        .method-cnv {
+            background: #fff1f1;
+            border-color: #f5c2c2;
+            color: #b42323;
+        }
+
+        .method-grow {
+            background: #eef6ff;
+            border-color: #cfe3ff;
+            color: #1d5fa7;
+        }
+
+        .method-servei {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #3f7a0d;
         }
 
         .badge-cnv {
@@ -707,14 +730,99 @@
             min-height: 300px;
         }
 
-        .quadrant-header {
-            padding: 10px 14px;
-            font-family: 'Varela Round';
-            font-size: 0.82rem;
-            color: var(--cep-black);
-            border-bottom: 1px solid #e5e7eb;
-            background: rgba(255,255,255,0.9);
-        }
+/*.quadrant-header {
+    align-items: flex-start;
+}*/
+
+
+.quadrant-template-btn:hover {
+    border-color: #94a3b8;
+    color: var(--cep-black);
+}
+        
+ .quadrant-header {
+    padding: 12px 16px;
+    font-family: 'Varela Round';
+    font-size: 0.82rem;
+    color: var(--cep-black);
+    border-bottom: 1px solid #e5e7eb;
+    background: rgba(255,255,255,0.92);
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 4px;
+
+    min-height: 70px;
+}
+.quadrant-title {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drop-note {
+    grid-column: 1 / -1; /* ocupa tota la fila */
+    grid-row: 2;
+
+    font-size: 0.72rem;
+    color: #8ea0bb;
+    line-height: 1.3;
+
+    min-height: 2.4em;
+}
+.quadrant-template-btn {
+    
+    align-self: start;
+
+    
+    white-space: nowrap;
+}
+.quadrant-template-btn {
+    grid-column: 2;
+    grid-row: 1;
+
+    justify-self: end;
+
+    border: 2px solid var(--cep-blue);
+    background: white;
+    color: #64748b;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.quadrant-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.template-btn {
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #64748b;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.template-btn:hover {
+    border-color: var(--cep-blue);
+    color: var(--cep-blue);
+    background: #f8fbff;
+}
+
 
         .quadrant-area {
             position: relative;
@@ -825,6 +933,147 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .emotion-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0 10px 0;
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #f8fafc;
+            opacity: 0.85;
+        }
+        .emotion-toolbar:hover {
+                opacity: 1;
+        }
+
+        .emotion-toolbar-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-right: 4px;
+        }
+
+        .emotion-toggle-group {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .emotion-toggle-btn {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: var(--cep-grey);
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .emotion-toggle-btn.active {
+            background: var(--cep-blue);
+            border-color: var(--cep-blue);
+            color: white;
+        }
+
+        .emotion-search-input {
+            flex: 1;
+            min-width: 140px;
+            border: 1px solid #cbd5e1;
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.72rem;
+        }
+
+        .emotion-search-input:focus {
+            border-color: var(--cep-blue);
+            outline: none;
+        }
+        .emotion-toolbar-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+#btn-emotion-reshuffle {
+    display: none;
+}
+#btn-need-reshuffle {
+    display: none;
+}
+.template-dropdown {
+    position: relative;
+}
+
+.template-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    padding: 6px;
+    display: none;
+    min-width: 180px;
+    z-index: 20;
+}
+
+.template-menu.open {
+    display: block;
+}
+
+.template-option {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--cep-grey);
+}
+
+.template-option:hover {
+    background: #f1f5f9;
+    color: var(--cep-black);
+}
+
+.situations-switcher {
+    display: flex;
+    gap: 8px;
+    margin: 4px 0 18px 0;
+    flex-wrap: wrap;
+}
+
+.situations-switch-btn {
+    border: 1px solid #d8dee6;
+    background: white;
+    color: var(--cep-grey);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.situations-switch-btn:hover {
+    border-color: var(--cep-blue);
+    color: var(--cep-blue);
+    background: #f8fbff;
+}
+
+.situations-switch-btn.active {
+    background: var(--cep-red);
+    border-color: var(--cep-red);
+    color: white;
+}
+
+
     </style>
 </head>
 <body>
@@ -871,20 +1120,13 @@
     <main id="main-content">
         <div id="view-home">
             <div class="home-hero">
-                <!--<div class="card home-intro">
-                    <h1>PARA, PARLA, PACTA</h1>
-                    <p>
-                        Una porta d’entrada pedagògica per observar què està passant, conversar amb criteri i convertir la conversa en acords viables. Tota l’aplicació es pot llegir des d’aquestes tres paraules clau.
-                    </p>
-                </div>-->
-
                 <div class="pillars-grid">
                     <div class="pillar-card pillar-para">
                         <div class="pillar-top">
                             <small>Observar i situar</small>
                             <h3 class="pillar-title">PARA</h3>
                             <p class="pillar-desc">
-                                Atura el moviment, mira la situació i identifica què està passant abans d’actuar. Agafa aire. 
+                                Atura el moviment, mira la situació i identifica què està passant abans d’actuar. Agafa aire.
                             </p>
                         </div>
                         <div class="pillar-links">
@@ -922,130 +1164,275 @@
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="home-footer-note">
-                    <strong style="color:var(--cep-black);">Lectura ràpida de l’eina:</strong>
-                    <br>
-                    <strong>PARA</strong> ajuda a veure la situació. <strong>PARLA</strong> ajuda a conduir la conversa. <strong>PACTA</strong> ajuda a aterrar-la en compromisos i seguiment.
-                </div>-->
             </div>
         </div>
 
-        <div id="view-situacions" style="display:none;">
-            <div class="card">
-                <h2>Situacions</h2>
-                <p style="margin-top:-4px; margin-bottom:18px;">Identifica quin tipus de situació tens al davant per decidir des d’on començar.</p>
-                <div class="diag-grid" id="diag-grid-container"></div>
-            </div>
+ <div id="view-situacions" style="display:none;">
+    <div class="card">
+        <h2>Situacions</h2>
+        <p id="situations-intro" style="margin-top:-4px; margin-bottom:18px;">
+            Identifica quin tipus de situació tens al davant per decidir des d’on començar.
+        </p>
+
+        <div class="situations-switcher">
+            <button class="situations-switch-btn active" id="btn-situation-blocking" onclick="setSituationMode('blocking')">
+                Bloquejants
+            </button>
+            <button class="situations-switch-btn" id="btn-situation-facilitating" onclick="setSituationMode('facilitating')">
+                Facilitadores
+            </button>
         </div>
 
-        <div id="view-organitzador" style="display:none;">
-            <div class="card">
-                <h2><i class="fa-solid fa-table-cells-large"></i> Organitzador gràfic interactiu</h2>
+        <div class="diag-grid" id="diag-grid-container"></div>
+    </div>
+</div>
+  
+<div id="view-organitzador" style="display:none;">
+    <div class="card">
+        <h2><i class="fa-solid fa-table-cells-large"></i> Organitzador gràfic interactiu</h2>
 
-                <div class="organizer-layout">
-                    <div class="organizer-bank">
-                        <div class="bank-accordion-item" id="acc-situacions">
-                            <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-situacions')">
-                                <span class="left"><i class="fa-solid fa-camera"></i> Situacions</span>
-                                <span class="right">
-                                    <span class="mini-action-btn" onclick="event.stopPropagation(); openItemModal('situacio')">+ Afegir</span>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </span>
-                            </button>
-                            <div class="bank-accordion-content" id="situacions-bank"></div>
+        <div class="organizer-layout">
+            <div class="organizer-bank">
+                <div class="bank-accordion-item open" id="acc-situacions">
+                    <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-situacions')">
+                        <span class="left"><i class="fa-solid fa-camera"></i> Situacions</span>
+                        <span class="right">
+                            <span class="mini-action-btn" onclick="event.stopPropagation(); openItemModal('situacio')">+ Afegir</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="bank-accordion-content" id="situacions-bank"></div>
+                </div>
+
+                <div class="bank-accordion-item" id="acc-emocions">
+                    <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-emocions')">
+                        <span class="left"><i class="fa-solid fa-heart"></i> Emocions</span>
+                        <span class="right"><i class="fa-solid fa-chevron-down"></i></span>
+                    </button>
+
+                    <div class="bank-accordion-content">
+                        <div class="emotion-toolbar">
+                            <div class="emotion-toolbar-block">
+                                <span class="emotion-toolbar-label">Tipus</span>
+                                <div class="emotion-toggle-group">
+                                    <button class="emotion-toggle-btn" id="btn-emotion-covered" onclick="setEmotionMode('covered')">
+                                        Cobertes
+                                    </button>
+                                    <button class="emotion-toggle-btn" id="btn-emotion-uncovered" onclick="setEmotionMode('uncovered')">
+                                        No cobertes
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="emotion-toolbar-block">
+                                <span class="emotion-toolbar-label">Vista</span>
+                                <div class="emotion-toggle-group">
+                                    <button class="emotion-toggle-btn" id="btn-emotion-grouped" onclick="setEmotionViewMode('grouped')">
+                                        Endreçades
+                                    </button>
+                                    <button class="emotion-toggle-btn" id="btn-emotion-shuffled" onclick="setEmotionViewMode('shuffled')">
+                                        Barrejades
+                                    </button>
+                                    <button class="emotion-toggle-btn" id="btn-emotion-reshuffle" onclick="reshuffleEmotions()">
+                                        🔀
+                                    </button>
+                                </div>
+                            </div>
+
+                            <input
+                                type="text"
+                                id="emotion-search-input"
+                                class="emotion-search-input"
+                                placeholder="Cercar..."
+                                oninput="setEmotionSearch(this.value)">
                         </div>
 
-                        <div class="bank-accordion-item" id="acc-emocions">
-                            <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-emocions')">
-                                <span class="left"><i class="fa-solid fa-heart"></i> Emocions</span>
-                                <span class="right"><i class="fa-solid fa-chevron-down"></i></span>
-                            </button>
-                            <div class="bank-accordion-content" id="organizer-emotions-bank"></div>
+                        <div id="organizer-emotions-bank"></div>
+                    </div>
+                </div>
+
+                <div class="bank-accordion-item" id="acc-necessitats">
+                    <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-necessitats')">
+                        <span class="left"><i class="fa-solid fa-gem"></i> Necessitats</span>
+                        <span class="right"><i class="fa-solid fa-chevron-down"></i></span>
+                    </button>
+
+                    <div class="bank-accordion-content">
+                        <div class="emotion-toolbar">
+                            <div class="emotion-toolbar-block">
+                                <span class="emotion-toolbar-label">Vista</span>
+                                <div class="emotion-toggle-group">
+                                    <button class="emotion-toggle-btn" id="btn-need-grouped" onclick="setNeedViewMode('grouped')">
+                                        Endreçades
+                                    </button>
+                                    <button class="emotion-toggle-btn" id="btn-need-shuffled" onclick="setNeedViewMode('shuffled')">
+                                        Barrejades
+                                    </button>
+                                    <button class="emotion-toggle-btn" id="btn-need-reshuffle" onclick="reshuffleNeeds()">
+                                        🔀
+                                    </button>
+                                </div>
+                            </div>
+
+                            <input
+                                type="text"
+                                id="need-search-input"
+                                class="emotion-search-input"
+                                placeholder="Cercar necessitat..."
+                                oninput="setNeedSearch(this.value)">
                         </div>
 
-                        <div class="bank-accordion-item" id="acc-necessitats">
-                            <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-necessitats')">
-                                <span class="left"><i class="fa-solid fa-gem"></i> Necessitats</span>
-                                <span class="right"><i class="fa-solid fa-chevron-down"></i></span>
-                            </button>
-                            <div class="bank-accordion-content" id="necessitats-bank"></div>
+                        <div id="necessitats-bank"></div>
+                    </div>
+                </div>
+
+                <div class="bank-accordion-item open" id="acc-accions">
+                    <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-accions')">
+                        <span class="left">🌼 Accions</span>
+                        <span class="right">
+                            <span class="mini-action-btn" onclick="event.stopPropagation(); openItemModal('accio')">+ Afegir</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="bank-accordion-content" id="accions-bank"></div>
+                </div>
+            </div>
+
+            <div class="organizer-board">
+                <div class="quadrant quadrant-situacions"
+                     ondragover="event.preventDefault()"
+                     ondrop="dropOrganizerItem(event, 'situacions-area', 'situacio')">
+
+                    <div class="quadrant-header">
+                        <div class="quadrant-title">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Situacions</span>
                         </div>
 
-                        <div class="bank-accordion-item" id="acc-accions">
-                            <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-accions')">
-                                <span class="left">🌼 Accions</span>
-                                <span class="right">
-                                    <span class="mini-action-btn" onclick="event.stopPropagation(); openItemModal('accio')">+ Afegir</span>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </span>
+                        <div class="template-dropdown">
+                            <button class="quadrant-template-btn" onclick="toggleTemplateMenu(event)">
+                                Plantilla
                             </button>
-                            <div class="bank-accordion-content" id="accions-bank"></div>
+
+                            <div class="template-menu" id="template-menu">
+                                <div class="template-option" onclick="applyTemplate('blank')">
+                                    En blanc
+                                </div>
+                                <div class="template-option" onclick="applyTemplate('roi')">
+                                    Retorn de la inversió
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="drop-note" id="hint-situacions">
+                            Només situacions
                         </div>
                     </div>
 
-                    <div class="organizer-board">
-                        <div class="quadrant quadrant-situacions" ondragover="event.preventDefault()" ondrop="dropOrganizerItem(event, 'situacions-area', 'situacio')">
-                            <div class="quadrant-header">
-                                <i class="fa-solid fa-camera"></i> Situacions
-                                <span class="drop-note">Només situacions</span>
-                            </div>
-                            <div class="quadrant-area" id="situacions-area"></div>
+                    <div class="quadrant-area" id="situacions-area"></div>
+                </div>
+
+                <div class="quadrant quadrant-emocions"
+                     ondragover="event.preventDefault()"
+                     ondrop="dropOrganizerItem(event, 'emocions-area-organizer', 'emocio')">
+
+                    <div class="quadrant-header">
+                        <div class="quadrant-title">
+                            <i class="fa-solid fa-heart"></i>
+                            <span>Emocions</span>
                         </div>
 
-                        <div class="quadrant quadrant-emocions" ondragover="event.preventDefault()" ondrop="dropOrganizerItem(event, 'emocions-area-organizer', 'emocio')">
-                            <div class="quadrant-header">
-                                <i class="fa-solid fa-heart"></i> Emocions
-                                <span class="drop-note">Només emocions</span>
-                            </div>
-                            <div class="quadrant-area" id="emocions-area-organizer"></div>
-                        </div>
+                        <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
 
-                        <div class="quadrant quadrant-necessitats" ondragover="event.preventDefault()" ondrop="dropOrganizerItem(event, 'necessitats-area', 'necessitat')">
-                            <div class="quadrant-header">
-                                <i class="fa-solid fa-gem"></i> Necessitats
-                                <span class="drop-note">Només necessitats</span>
-                            </div>
-                            <div class="quadrant-area" id="necessitats-area"></div>
-                        </div>
-
-                        <div class="quadrant quadrant-accions" ondragover="event.preventDefault()" ondrop="dropOrganizerItem(event, 'accions-area', 'accio')">
-                            <div class="quadrant-header">
-                                🌼 Accions
-                                <span class="drop-note">Només accions</span>
-                            </div>
-                            <div class="quadrant-area" id="accions-area"></div>
+                        <div class="drop-note" id="hint-emocions">
+                            Només emocions
                         </div>
                     </div>
+
+                    <div class="quadrant-area" id="emocions-area-organizer"></div>
+                </div>
+
+                <div class="quadrant quadrant-necessitats"
+                     ondragover="event.preventDefault()"
+                     ondrop="dropOrganizerItem(event, 'necessitats-area', 'necessitat')">
+
+                    <div class="quadrant-header">
+                        <div class="quadrant-title">
+                            <i class="fa-solid fa-gem"></i>
+                            <span>Necessitats</span>
+                        </div>
+
+                        <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
+
+                        <div class="drop-note" id="hint-necessitats">
+                            Només necessitats
+                        </div>
+                    </div>
+
+                    <div class="quadrant-area" id="necessitats-area"></div>
+                </div>
+
+                <div class="quadrant quadrant-accions"
+                     ondragover="event.preventDefault()"
+                     ondrop="dropOrganizerItem(event, 'accions-area', 'accio')">
+
+                    <div class="quadrant-header">
+                        <div class="quadrant-title">
+                            <span>🌼</span>
+                            <span>Accions</span>
+                        </div>
+
+                        <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
+
+                        <div class="drop-note" id="hint-accions">
+                            Només accions
+                        </div>
+                    </div>
+
+                    <div class="quadrant-area" id="accions-area"></div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
         <div id="view-model" style="display:none;">
             <div class="card">
                 <h2>El camí de les 13 Etapes</h2>
-                <div id="stages-accordion"></div>
+                <div class="section-stack">
+                    <p class="section-subintro">Vista ràpida de totes les etapes amb un element visual i una frase de context.</p>
+                    <div class="method-grid" id="model-grid"></div>
+                </div>
             </div>
         </div>
 
         <div id="view-cnv" style="display:none;">
             <div class="card">
                 <h2>Metodologia CNV</h2>
-                <div id="cnv-accordion"></div>
+                <div class="section-stack">
+                    <p class="section-subintro">Les etapes vinculades a la Comunicació No Violenta, amb lectura visual ràpida.</p>
+                    <div class="method-grid" id="cnv-grid"></div>
+                </div>
             </div>
         </div>
 
         <div id="view-grow" style="display:none;">
             <div class="card">
                 <h2>Metodologia GROW</h2>
-                <div id="grow-accordion"></div>
+                <div class="section-stack">
+                    <p class="section-subintro">Les etapes vinculades al model GROW, amb icona i frase de context.</p>
+                    <div class="method-grid" id="grow-grid"></div>
+                </div>
             </div>
         </div>
 
         <div id="view-servei" style="display:none;">
             <div class="card">
                 <h2>Lideratge al Servei</h2>
-                <div id="servei-accordion"></div>
+                <div class="section-stack">
+                    <p class="section-subintro">Les etapes on el lideratge al servei pren més pes en l’acompanyament.</p>
+                    <div class="method-grid" id="servei-grid"></div>
+                </div>
             </div>
         </div>
 
@@ -1104,6 +1491,75 @@
             { n: 12, f: "Desenvolupar", m: ["Servei"], e: "Creixement", c: ["E", "A"], ic: "fa-arrow-up-right-dots", color: "orange", t: "Repetició d'errors", p: "No n'aprèn de les pífies.", q: "Què t'ajudaria a fer-ho mejor la propera vegada?", a: "Transforma l'error en lliçó de futur.", err: "No reflexionar", sup: ["Què has aprendre?", "Com t'ha fet créixer aquest repte?"] },
             { n: 13, f: "Mantenir", m: ["Servei"], e: "Seguiment", c: ["R"], ic: "fa-flag-checkered", color: "green", t: "Dissolució del pla", p: "L'acció es perd en el temps.", q: "Quin és el següent pas a partir d'aquí?", a: "Agenda una nova fita de control.", err: "No tancar el compromís", sup: ["Quan ens tornem a veure?", "Com ho celebrarem?"] }
         ];
+const facilitatingSituations = [
+    {
+        n: 1,
+        t: "Disponibilitat inicial",
+        p: "Hi ha una obertura mínima per mirar què passa."
+    },
+    {
+        n: 2,
+        t: "Connexió emocional possible",
+        p: "La persona pot expressar com està o connectar amb el que sent."
+    },
+    {
+        n: 3,
+        t: "Necessitat identificable",
+        p: "Ja es pot començar a posar nom al que falta o importa."
+    },
+    {
+        n: 4,
+        t: "Objectiu emergent",
+        p: "Comença a aparèixer una direcció clara o una meta útil."
+    },
+    {
+        n: 5,
+        t: "Lectura realista",
+        p: "Es pot mirar la situació amb una mica de realitat i concreció."
+    },
+    {
+        n: 6,
+        t: "Assumpció de responsabilitat",
+        p: "La persona reconeix alguna part pròpia de marge d’acció."
+    },
+    {
+        n: 7,
+        t: "Generació d’alternatives",
+        p: "Apareixen opcions, idees o maneres diferents d’avançar."
+    },
+    {
+        n: 8,
+        t: "Disposició a decidir",
+        p: "Hi ha prou claredat per començar a triar un primer pas."
+    },
+    {
+        n: 9,
+        t: "Compromís viable",
+        p: "Es pot convertir la conversa en un acord realista."
+    },
+    {
+        n: 10,
+        t: "Posada en marxa",
+        p: "L’acció pot començar sense quedar encallada."
+    },
+    {
+        n: 11,
+        t: "Suport disponible",
+        p: "Hi ha ajuda, recursos o acompanyament que sostenen el pas."
+    },
+    {
+        n: 12,
+        t: "Aprenentatge en marxa",
+        p: "La situació es pot aprofitar per créixer i ajustar."
+    },
+    {
+        n: 13,
+        t: "Continuïtat possible",
+        p: "Es pot donar seguiment i mantenir el que funciona."
+    }
+];
+
+
 
         const emotionsWithIcons = {
             "Afecte": [
@@ -1158,6 +1614,135 @@
             ]
         };
 
+        const emotionsUncovered = {
+            "Desconnexió": [
+                {t: "Avorrida", i: "😶"},
+                {t: "Afectada", i: "😔"},
+                {t: "Aïllada", i: "🏝️"},
+                {t: "Apàtica", i: "😐"},
+                {t: "Desconnectada", i: "🔌"},
+                {t: "Desitjosa", i: "🤲"},
+                {t: "Llunyana", i: "🌫️"},
+                {t: "Freda", i: "❄️"},
+                {t: "Indiferent", i: "😑"}
+            ],
+            "Confusió": [
+                {t: "Blocada", i: "🧱"},
+                {t: "Confosa", i: "😵"},
+                {t: "Desorientada", i: "🧭"},
+                {t: "Dividida", i: "⚡"},
+                {t: "Dubtosa", i: "❓"},
+                {t: "Escèptica", i: "🤨"},
+                {t: "Espessa", i: "🌫️"},
+                {t: "Indecisa", i: "↔️"},
+                {t: "Paralitzada", i: "🛑"},
+                {t: "Pensativa", i: "🤔"},
+                {t: "Perduda", i: "🧍"},
+                {t: "Perplexa", i: "😳"},
+                {t: "Vacil·lant", i: "🫥"}
+            ],
+            "Irritació": [
+                {t: "Consternada", i: "😠"},
+                {t: "Frustrada", i: "😤"},
+                {t: "Impacient", i: "⏳"},
+                {t: "Iracunda", i: "🔥"},
+                {t: "Irritada", i: "😡"},
+                {t: "Malhumorada", i: "🌩️"},
+                {t: "Molesta", i: "😒"}
+            ],
+            "Tristesa": [
+                {t: "Decebuda", i: "😞"},
+                {t: "Deprimida", i: "😔"},
+                {t: "Desanimada", i: "😕"},
+                {t: "Desgraciada", i: "😢"},
+                {t: "Desil·lusionada", i: "💔"},
+                {t: "Infeliç", i: "😣"},
+                {t: "Trista", i: "😢"}
+            ],
+            "Enyor": [
+                {t: "Enyorada", i: "🌙"},
+                {t: "Gelosa", i: "😒"},
+                {t: "Envejada", i: "👀"},
+                {t: "Melancòlica", i: "🎻"},
+                {t: "Nostàlgica", i: "📷"},
+                {t: "Sola", i: "🧍"}
+            ],
+            "Por": [
+                {t: "Aclaparada", i: "😰"},
+                {t: "Espantada", i: "😱"},
+                {t: "Aterroritzada", i: "👻"},
+                {t: "Aterida", i: "🥶"},
+                {t: "Desconfiada", i: "🕵️"},
+                {t: "En pànic", i: "🚨"},
+                {t: "Preocupada", i: "😟"}
+            ],
+            "Neguit": [
+                {t: "Agitada", i: "💨"},
+                {t: "Agobiada", i: "😵‍💫"},
+                {t: "Alarmada", i: "🚨"},
+                {t: "Arrepentida", i: "😣"},
+                {t: "Avergonyida", i: "😳"},
+                {t: "Desconcertada", i: "🤯"},
+                {t: "Escandalitzada", i: "😲"},
+                {t: "Incòmoda", i: "🪑"},
+                {t: "Inquieta", i: "🌀"},
+                {t: "Intranquil·la", i: "🌊"},
+                {t: "Preocupada", i: "😟"},
+                {t: "Sorprès/a", i: "😮"},
+                {t: "Temblorosa", i: "🥴"}
+            ],
+            "Cansament": [
+                {t: "Abatuda", i: "😩"},
+                {t: "Aïllada", i: "🏝️"},
+                {t: "Cansada", i: "😴"},
+                {t: "Débil", i: "🪫"},
+                {t: "Dolorida", i: "🤕"},
+                {t: "Fatigada", i: "🥱"},
+                {t: "Exhausta", i: "😵"},
+                {t: "Afligida", i: "😞"},
+                {t: "Angustiada", i: "😣"},
+                {t: "Desganada", i: "😪"},
+                {t: "Esgotada", i: "🪫"}
+            ],
+            "Vulnerabilitat": [
+                {t: "Fràgil", i: "🥺"},
+                {t: "Impotent", i: "😣"},
+                {t: "Insegura", i: "😟"},
+                {t: "Sensible", i: "💧"},
+                {t: "Tímida", i: "🙈"},
+                {t: "Vulnerable", i: "🫀"}
+            ],
+            "Tensió": [
+                {t: "Ansiosa", i: "😰"},
+                {t: "Commocionada", i: "😳"},
+                {t: "Desbordada", i: "🌊"},
+                {t: "Estressada", i: "💼"},
+                {t: "Irritable", i: "⚡"},
+                {t: "Nerviosa", i: "🫨"},
+                {t: "Sobrecaregda", i: "📦"},
+                {t: "Anegada", i: "🌊"},
+                {t: "Tensa", i: "🧵"}
+            ],
+            "Enuig": [
+                {t: "Disgustada", i: "🤢"},
+                {t: "Enfadada", i: "😡"},
+                {t: "Frustrada", i: "😤"},
+                {t: "Irritada", i: "😠"},
+                {t: "Iracunda", i: "🔥"},
+                {t: "Indignada", i: "⚖️"},
+                {t: "Molesta", i: "😒"},
+                {t: "Rencorosa", i: "🖤"}
+            ],
+            "Aversió": [
+                {t: "Fàstic", i: "🤮"},
+                {t: "Menyspreu", i: "😤"},
+                {t: "Horroritzada", i: "😱"},
+                {t: "Desdeny", i: "😒"},
+                {t: "Odi", i: "💢"},
+                {t: "Rebutjant", i: "🚫"}
+            ]
+        };
+
         const catColors = {
             "Afecte": "#D8262E",
             "Inspiració": "#F98D29",
@@ -1169,7 +1754,20 @@
             "Entusiasme": "#F98D29",
             "Interès": "#6A478D",
             "Felicitat": "#648B1A",
-            "Descans": "#009ABE"
+            "Descans": "#009ABE",
+
+            "Desconnexió": "#575756",
+            "Confusió": "#6A478D",
+            "Irritació": "#F98D29",
+            "Tristesa": "#009ABE",
+            "Enyor": "#648B1A",
+            "Por": "#D8262E",
+            "Neguit": "#F98D29",
+            "Cansament": "#575756",
+            "Vulnerabilitat": "#009ABE",
+            "Tensió": "#6A478D",
+            "Enuig": "#D8262E",
+            "Aversió": "#000000"
         };
 
         const needsWithIcons = {
@@ -1209,11 +1807,163 @@
             "Ordre": "#575756"
         };
 
-        let openAccordionN = null;
+        
         let currentItemType = null;
-        let customSituations = [];
-        let customActions = [];
+let customSituations = [];
+let customActions = [];
+let situationMode = 'blocking';
 
+        let emotionMode = 'covered';
+        let emotionViewMode = 'grouped';
+        let emotionShuffleSeed = 0;
+        let emotionSearch = '';
+        
+        let needViewMode = 'grouped';
+        let needShuffleSeed = 0;
+        let needSearch = '';
+ 
+function applyTemplate(type) {
+    const templates = {
+        blank: {
+            situacions: "Només situacions",
+            emocions: "Només emocions",
+            necessitats: "Només necessitats",
+            accions: "Només accions"
+        },
+        roi: {
+            situacions: "Crea una columna de situacions.",
+            emocions: "Situa les emocions percebudes a la mateixa alçada de cada situació.",
+            necessitats: "Indica quines necessitats vols cobrir.",
+            accions: "Situa accions que et poden apropar a cobrir les necessitats; a dalt, les accions de major retorn de l'esforç."
+        }
+    };
+
+    const t = templates[type];
+    if (!t) return;
+
+    document.getElementById('hint-situacions').textContent = t.situacions;
+    document.getElementById('hint-emocions').textContent = t.emocions;
+    document.getElementById('hint-necessitats').textContent = t.necessitats;
+    document.getElementById('hint-accions').textContent = t.accions;
+
+    const menu = document.getElementById('template-menu');
+    if (menu) menu.classList.remove('open');
+}        
+
+function setNeedSearch(value) {
+    needSearch = value.trim().toLowerCase();
+    renderNecessitatsBank();
+}
+
+function reshuffleNeeds() {
+    needShuffleSeed++;
+    renderNecessitatsBank();
+}
+
+function setNeedViewMode(mode) {
+    needViewMode = mode;
+    updateNeedToolbar();
+    renderNecessitatsBank();
+}
+
+function updateNeedToolbar() {
+    const groupedBtn = document.getElementById('btn-need-grouped');
+    const shuffledBtn = document.getElementById('btn-need-shuffled');
+    const reshuffleBtn = document.getElementById('btn-need-reshuffle');
+
+    if (groupedBtn) groupedBtn.classList.toggle('active', needViewMode === 'grouped');
+    if (shuffledBtn) shuffledBtn.classList.toggle('active', needViewMode === 'shuffled');
+
+    if (reshuffleBtn) {
+        reshuffleBtn.style.display = needViewMode === 'shuffled' ? 'inline-flex' : 'none';
+    }
+}
+
+        function setEmotionSearch(value) {
+            emotionSearch = value.trim().toLowerCase();
+            renderOrganizerEmotionsBank();
+        }
+
+        function reshuffleEmotions() {
+            emotionShuffleSeed++;
+            renderOrganizerEmotionsBank();
+        }
+
+        function getActiveEmotionSet() {
+            return emotionMode === 'covered' ? emotionsWithIcons : emotionsUncovered;
+        }
+
+        function setEmotionMode(mode) {
+            emotionMode = mode;
+
+            // Actualitza botons
+            document.getElementById('btn-emotion-covered').classList.toggle('active', mode === 'covered');
+            document.getElementById('btn-emotion-uncovered').classList.toggle('active', mode === 'uncovered');
+
+            // 🔥 RESET CERCA
+            emotionSearch = '';
+            const input = document.getElementById('emotion-search-input');
+            if (input) input.value = '';
+
+            renderOrganizerEmotionsBank();
+        }
+
+        function setEmotionViewMode(mode) {
+            emotionViewMode = mode;
+            updateEmotionToolbar();
+            renderOrganizerEmotionsBank();
+        }
+
+        function updateEmotionToolbar() {
+            const coveredBtn = document.getElementById('btn-emotion-covered');
+            const uncoveredBtn = document.getElementById('btn-emotion-uncovered');
+            const groupedBtn = document.getElementById('btn-emotion-grouped');
+            const shuffledBtn = document.getElementById('btn-emotion-shuffled');
+            const reshuffleBtn = document.getElementById('btn-emotion-reshuffle');
+
+            if (coveredBtn) coveredBtn.classList.toggle('active', emotionMode === 'covered');
+            if (uncoveredBtn) uncoveredBtn.classList.toggle('active', emotionMode === 'uncovered');
+            if (groupedBtn) groupedBtn.classList.toggle('active', emotionViewMode === 'grouped');
+            if (shuffledBtn) shuffledBtn.classList.toggle('active', emotionViewMode === 'shuffled');
+
+            if (reshuffleBtn) {
+                reshuffleBtn.style.display = emotionViewMode === 'shuffled' ? 'inline-flex' : 'none';
+            }
+        }
+
+function setSituationMode(mode) {
+    situationMode = mode;
+
+    const blockingBtn = document.getElementById('btn-situation-blocking');
+    const facilitatingBtn = document.getElementById('btn-situation-facilitating');
+    const intro = document.getElementById('situations-intro');
+
+    if (blockingBtn) blockingBtn.classList.toggle('active', mode === 'blocking');
+    if (facilitatingBtn) facilitatingBtn.classList.toggle('active', mode === 'facilitating');
+
+    if (intro) {
+        intro.textContent = mode === 'blocking'
+            ? "Identifica quin tipus de situació tens al davant per decidir des d’on començar."
+            : "Identifica quines situacions poden facilitar l’avanç i ajudar-te a orientar la conversa.";
+    }
+
+    renderSituations();
+}
+
+function getCurrentSituationsData() {
+    if (situationMode === 'facilitating') {
+        return stages.map(stage => {
+            const found = facilitatingSituations.find(item => item.n === stage.n);
+            return {
+                ...stage,
+                t: found ? found.t : stage.t,
+                p: found ? found.p : stage.p
+            };
+        });
+    }
+
+    return stages;
+}
         function showView(view) {
             ['home', 'situacions', 'cnv', 'grow', 'servei', 'frase', 'model', 'organitzador'].forEach(v => {
                 const el = document.getElementById(`view-${v}`);
@@ -1225,28 +1975,91 @@
             if (activeBtn) activeBtn.classList.add('active');
 
             if (view === 'situacions') renderSituations();
-            if (view === 'model') renderAccordion('stages-accordion', stages, 'model');
-            if (view === 'cnv') renderAccordion('cnv-accordion', stages.filter(s => s.m.includes('CNV')), 'cnv');
-            if (view === 'grow') renderAccordion('grow-accordion', stages.filter(s => s.m.includes('GROW')), 'grow');
-            if (view === 'servei') renderAccordion('servei-accordion', stages.filter(s => s.m.includes('Servei')), 'servei');
+
+            if (view === 'model') {
+                renderStageCards('model-grid', stages, true);
+            }
+
+            if (view === 'cnv') {
+                const list = stages.filter(s => s.m.includes('CNV'));
+                renderStageCards('cnv-grid', list, true);
+            }
+
+            if (view === 'grow') {
+                const list = stages.filter(s => s.m.includes('GROW'));
+                renderStageCards('grow-grid', list, true);
+            }
+
+            if (view === 'servei') {
+                const list = stages.filter(s => s.m.includes('Servei'));
+                renderStageCards('servei-grid', list, true);
+            }
+
             if (view === 'frase') renderFrase();
             if (view === 'organitzador') renderOrganizerBanks();
         }
 
-        function renderSituations() {
-            document.getElementById('diag-grid-container').innerHTML = stages.map(s => `
-                <div class="diag-item" onclick="openModal(${s.n})">
-                    <div class="diag-icon ic-${s.color}">
-                        <i class="fa-solid ${s.ic}"></i>
-                    </div>
-                    <div>
-                        <strong>${s.n}. ${s.t}</strong>
-                        <p>${s.p}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
+ function renderSituations() {
+    const data = getCurrentSituationsData();
 
+    document.getElementById('diag-grid-container').innerHTML = data.map(s => `
+        <div class="diag-item" onclick="openModal(${s.n})">
+            <div class="diag-icon ic-${s.color}">
+                <i class="fa-solid ${s.ic}"></i>
+            </div>
+            <div>
+                <strong>${s.n}. ${s.t}</strong>
+                <p>${s.p}</p>
+            </div>
+        </div>
+    `).join('');
+}
+        function renderStageCards(containerId, list, fullWidth = false) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.className = fullWidth ? 'method-grid' : 'diag-grid';
+
+            container.innerHTML = list.map(s => {
+
+                let rightContent = "";
+
+                if (fullWidth) {
+                    // CNV / GROW / Servei → badges
+                    rightContent = s.m.map(method => {
+                        if (method === 'CNV') {
+                            return `<span class="method-badge method-cnv">❤️ CNV</span>`;
+                        }
+                        if (method === 'GROW') {
+                            return `<span class="method-badge method-grow">🌱 GROW</span>`;
+                        }
+                        if (method === 'Servei') {
+                            return `<span class="method-badge method-servei">🤝 Servei</span>`;
+                        }
+                        return '';
+                    }).join(' ');
+                } else {
+                    // Situacions → fase
+                    rightContent = `<span style="font-size:0.68rem; font-weight:700; color:#94a3b8;">${s.e}</span>`;
+                }
+
+                return `
+                    <div class="diag-item" onclick="openModal(${s.n})">
+                        <div class="diag-icon ic-${s.color}">
+                            <i class="fa-solid ${s.ic}"></i>
+                        </div>
+                        <div style="flex:1;">
+                            <strong>${s.n}. ${s.f}</strong>
+                            <p>${s.p}</p>
+                        </div>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;">
+                            ${rightContent}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
         function makeMoveable(el) {
             let startX = 0, startY = 0;
             let initialX = 0, initialY = 0;
@@ -1286,38 +2099,22 @@
             }
         }
 
-        function renderAccordion(id, list, sourceView) {
-            document.getElementById(id).innerHTML = list.map(s => `
-                <div class="accordion-item ${openAccordionN === s.n ? 'open' : ''}">
-                    <div class="accordion-header" onclick="toggleAcc(${s.n}, '${sourceView}')">
-                        <strong>${s.n}. ${s.f}</strong>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">${renderDetails(s)}</div>
-                </div>
-            `).join('');
-        }
+        
 
-        function toggleAcc(n, sourceView) {
-            openAccordionN = (openAccordionN === n) ? null : n;
-            showView(sourceView);
-        }
+       
 
         function renderDetails(s) {
             const metodologiaBadges = s.m.map(method => {
-                let cls = 'badge-grow';
-                let icon = 'fa-seedling';
-
                 if (method === 'CNV') {
-                    cls = 'badge-cnv';
-                    icon = 'fa-heart';
+                    return `<span class="method-badge method-cnv">❤️ CNV</span>`;
+                }
+                if (method === 'GROW') {
+                    return `<span class="method-badge method-grow">🌱 GROW</span>`;
                 }
                 if (method === 'Servei') {
-                    cls = 'badge-servei';
-                    icon = 'fa-hand-holding-heart';
+                    return `<span class="method-badge method-servei">🤝 Servei</span>`;
                 }
-
-                return `<span class="mini-badge ${cls}"><i class="fa-solid ${icon}"></i>${method}</span>`;
+                return '';
             }).join('');
 
             const fraseBadges = s.c.map(code => `
@@ -1391,17 +2188,19 @@
             `;
         }
 
-        function openModal(n) {
-            const s = stages.find(x => x.n === n);
-            document.getElementById('modal-content').innerHTML = `
-                <h3>${s.n}. ${s.f}</h3>
-                <p style="margin-top:-6px; color:#64748b; font-size:0.9rem;">
-                    <strong>${s.t}</strong> · ${s.p}
-                </p>
-                ${renderDetails(s)}
-            `;
-            document.getElementById('modal-container').style.display = 'flex';
-        }
+       function openModal(n) {
+    const source = getCurrentSituationsData();
+    const s = source.find(x => x.n === n) || stages.find(x => x.n === n);
+
+    document.getElementById('modal-content').innerHTML = `
+        <h3>${s.n}. ${s.f || ''}</h3>
+        <p style="margin-top:-6px; color:#64748b; font-size:0.9rem;">
+            <strong>${s.t}</strong> · ${s.p}
+        </p>
+        ${renderDetails(stages.find(x => x.n === n))}
+    `;
+    document.getElementById('modal-container').style.display = 'flex';
+}
 
         function closeModal() {
             document.getElementById('modal-container').style.display = 'none';
@@ -1438,14 +2237,14 @@
                 }
             });
         }
-
-        function renderOrganizerBanks() {
-            renderSituacionsBank();
-            renderOrganizerEmotionsBank();
-            renderNecessitatsBank();
-            renderAccionsBank();
-        }
-
+function renderOrganizerBanks() {
+    renderSituacionsBank();
+    renderOrganizerEmotionsBank();
+    renderNecessitatsBank();
+    renderAccionsBank();
+    updateEmotionToolbar();
+    updateNeedToolbar();
+}
         function renderSituacionsBank() {
             const container = document.getElementById('situacions-bank');
             container.innerHTML = customSituations.length
@@ -1457,50 +2256,134 @@
                         <i class="fa-solid fa-camera"></i> ${escapeHtml(item)}
                     </div>
                 `).join('')
-                : `<div class="bank-empty">Encara no hi ha situacions. Fes clic a “+ Afegir”.</div>`;
+                : `<div class="bank-empty">Encara no hi ha situacions.</div>`;
         }
 
         function renderOrganizerEmotionsBank() {
             const bank = document.getElementById('organizer-emotions-bank');
+            const activeSet = getActiveEmotionSet();
             let html = "";
 
-            for (const cat in emotionsWithIcons) {
-                html += `<div><div class="bank-subtitle" style="background:${catColors[cat]}">${cat}</div></div>`;
-                emotionsWithIcons[cat].forEach(emo => {
-                    html += `
-                        <div class="organizer-tag"
-                             draggable="true"
-                             style="--tag-accent:${catColors[cat]}"
-                             ondragstart="startOrganizerDrag(event, 'emocio', '${escapeForAttr(emo.i + ' ' + emo.t)}', '${catColors[cat]}')">
-                            ${emo.i} ${emo.t}
-                        </div>
-                    `;
-                });
+            if (emotionViewMode === 'grouped') {
+                for (const cat in activeSet) {
+                    const accentColor = catColors[cat] || '#64748b';
+
+                    const filteredItems = activeSet[cat].filter(emo =>
+                        emo.t.toLowerCase().includes(emotionSearch)
+                    );
+
+                    if (!filteredItems.length) continue;
+
+                    html += `<div><div class="bank-subtitle" style="background:${accentColor}">${cat}</div></div>`;
+
+                    filteredItems.forEach(emo => {
+                        html += `
+                            <div class="organizer-tag"
+                                draggable="true"
+                                style="--tag-accent:${accentColor}"
+                                ondragstart="startOrganizerDrag(event, 'emocio', '${escapeForAttr(emo.i + ' ' + emo.t)}', '${accentColor}')">
+                                ${emo.i} ${emo.t}
+                            </div>
+                        `;
+                    });
+                }
+            } else {
+                const mixed = [];
+
+                for (const cat in activeSet) {
+                    const accentColor = catColors[cat] || '#64748b';
+
+                    activeSet[cat].forEach(emo => {
+                        if (emo.t.toLowerCase().includes(emotionSearch)) {
+                            mixed.push({
+                                text: `${emo.i} ${emo.t}`,
+                                accent: accentColor
+                            });
+                        }
+                    });
+                }
+
+                mixed.sort(() => (Math.random() + emotionShuffleSeed * 0.0001) - 0.5);
+
+                html = mixed.map(emo => `
+                    <div class="organizer-tag"
+                        draggable="true"
+                        style="--tag-accent:${emo.accent}"
+                        ondragstart="startOrganizerDrag(event, 'emocio', '${escapeForAttr(emo.text)}', '${emo.accent}')">
+                        ${emo.text}
+                    </div>
+                `).join('');
+            }
+
+            if (!html.trim()) {
+                html = `<div class="emotion-search-empty">No s'han trobat emocions amb aquest criteri.</div>`;
             }
 
             bank.innerHTML = html;
         }
+
 
         function renderNecessitatsBank() {
-            const bank = document.getElementById('necessitats-bank');
-            let html = "";
+    const bank = document.getElementById('necessitats-bank');
+    let html = "";
 
-            for (const cat in needsWithIcons) {
-                html += `<div><div class="bank-subtitle" style="background:${organizerCategoryColors[cat]}">${cat}</div></div>`;
-                needsWithIcons[cat].forEach(item => {
-                    html += `
-                        <div class="organizer-tag"
-                             draggable="true"
-                             style="--tag-accent:${organizerCategoryColors[cat]}"
-                             ondragstart="startOrganizerDrag(event, 'necessitat', '${escapeForAttr(item.i + ' ' + item.t)}', '${organizerCategoryColors[cat]}')">
-                            ${item.i} ${item.t}
-                        </div>
-                    `;
-                });
-            }
+    if (needViewMode === 'grouped') {
+        for (const cat in needsWithIcons) {
+            const accentColor = organizerCategoryColors[cat] || '#64748b';
 
-            bank.innerHTML = html;
+            const filteredItems = needsWithIcons[cat].filter(item =>
+                item.t.toLowerCase().includes(needSearch)
+            );
+
+            if (!filteredItems.length) continue;
+
+            html += `<div><div class="bank-subtitle" style="background:${accentColor}">${cat}</div></div>`;
+
+            filteredItems.forEach(item => {
+                html += `
+                    <div class="organizer-tag"
+                        draggable="true"
+                        style="--tag-accent:${accentColor}"
+                        ondragstart="startOrganizerDrag(event, 'necessitat', '${escapeForAttr(item.i + ' ' + item.t)}', '${accentColor}')">
+                        ${item.i} ${item.t}
+                    </div>
+                `;
+            });
         }
+    } else {
+        const mixed = [];
+
+        for (const cat in needsWithIcons) {
+            const accentColor = organizerCategoryColors[cat] || '#64748b';
+
+            needsWithIcons[cat].forEach(item => {
+                if (item.t.toLowerCase().includes(needSearch)) {
+                    mixed.push({
+                        text: `${item.i} ${item.t}`,
+                        accent: accentColor
+                    });
+                }
+            });
+        }
+
+        mixed.sort(() => (Math.random() + needShuffleSeed * 0.0001) - 0.5);
+
+        html = mixed.map(item => `
+            <div class="organizer-tag"
+                draggable="true"
+                style="--tag-accent:${item.accent}"
+                ondragstart="startOrganizerDrag(event, 'necessitat', '${escapeForAttr(item.text)}', '${item.accent}')">
+                ${item.text}
+            </div>
+        `).join('');
+    }
+
+    if (!html.trim()) {
+        html = `<div class="emotion-search-empty">No s'han trobat necessitats amb aquest criteri.</div>`;
+    }
+
+    bank.innerHTML = html;
+}
 
         function renderAccionsBank() {
             const container = document.getElementById('accions-bank');
@@ -1513,7 +2396,7 @@
                         🌼 ${escapeHtml(item)}
                     </div>
                 `).join('')
-                : `<div class="bank-empty">Encara no hi ha accions. Fes clic a “+ Afegir”.</div>`;
+                : `<div class="bank-empty">Encara no hi ha accions.</div>`;
         }
 
         function startOrganizerDrag(e, type, text, accent) {
@@ -1608,8 +2491,22 @@
                 .replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;');
         }
+function toggleTemplateMenu(e) {
+    e.stopPropagation();
+    const menu = document.getElementById('template-menu');
+    menu.classList.toggle('open');
+}
 
-        window.onload = () => showView('home');
+// Tanca si cliques fora
+document.addEventListener('click', () => {
+    const menu = document.getElementById('template-menu');
+    if (menu) menu.classList.remove('open');
+});
+       window.onload = () => {
+    showView('home');
+    updateEmotionToolbar();
+    updateNeedToolbar();
+};
     </script>
 </body>
 </html>
