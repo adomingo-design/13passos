@@ -1259,6 +1259,22 @@
 .template-caret {
     transition: transform 0.2s ease;
 }
+.organizer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.organizer-export-btn {
+    color: #b42323;
+    border-color: #f5c2c2;
+    background: #fff1f1;
+}
+
+.organizer-export-btn:hover {
+    background: #ffe5e5;
+}
 
 
 
@@ -1418,9 +1434,16 @@
     <div class="card">
         <div class="organizer-title-row">
             <h2><i class="fa-solid fa-table-cells-large"></i> Organitzador gràfic interactiu</h2>
-            <button class="mini-action-btn organizer-clear-btn" onclick="handleClearOrganizer()">
-             🗑️ Esborrar mapa
-            </button>
+
+            <div class="organizer-actions">
+                <button class="mini-action-btn organizer-export-btn" onclick="openExportModal()">
+                    <i class="fa-solid fa-file-pdf"></i> Descarregar acta PDF
+                </button>
+
+                <button class="mini-action-btn organizer-clear-btn" onclick="handleClearOrganizer()">
+                    <i class="fa-solid fa-trash"></i> Esborrar mapa
+                </button>
+            </div>
         </div>
 
         <div class="organizer-layout">
@@ -1721,6 +1744,64 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="export-modal-container" onclick="closeExportModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeExportModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div id="export-modal-content">
+            <h3>Descarregar acta en PDF</h3>
+
+            <div style="margin-top: 16px;">
+                <label for="export-title" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                    Nom *
+                </label>
+                <input id="export-title" type="text"
+                    style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem;"
+                    placeholder="Ex. Mediació grup 2n A · abril 2026">
+            </div>
+
+            <div style="margin-top: 14px;">
+                <label for="export-subtitle" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                    Descripció
+                </label>
+                <input id="export-subtitle" type="text"
+                    style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem;"
+                    placeholder="Ex. Sessió de treball sobre convivència, reparació i acords">
+            </div>
+
+            <div style="margin-top: 14px;">
+                <label for="export-people" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                    Persones / equips
+                </label>
+                <input id="export-people" type="text"
+                    style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem;"
+                    placeholder="Ex. Tutoria, alumne, família, equip docent, coordinació...">
+            </div>
+
+            <div style="margin-top: 14px;">
+                <label for="export-notes" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                    Observacions
+                </label>
+                <textarea id="export-notes" rows="5"
+                    style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem; resize:vertical;"
+                    placeholder="Anotacions finals, acords, context de la sessió, elements a revisar..."></textarea>
+            </div>
+
+            <div style="margin-top:16px; display:flex; justify-content:flex-end; gap:10px;">
+                <button class="mini-action-btn" onclick="closeExportModal()">Cancel·lar</button>
+                <button class="mini-action-btn primary-btn" onclick="exportOrganizerPdf()">Generar PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    
     <script>
         const stages = [
             { n: 1, f: "Obrir", m: ["CNV"], e: "Observació", c: ["S"], ic: "fa-shield-halved", color: "red", t: "Resistència/Excuses", p: "🖤 Es defensa davant un feedback · ❤️ Hi ha una obertura mínima per mirar què passa", q: "He observat que [fet concret]... Com ho veus tu?", a: "Fes que se senti escoltat sense ser jutjat.", err: "Jutjar → Activa la resistència", sup: ["T'havies adonat d'això?", "És la primera vegada?"] },
@@ -2091,6 +2172,7 @@
         let needSearch = '';
 
 const ORGANIZER_STORAGE_KEY = 'un-cami-organizer-state-v1';
+const POLITENICS_LOGO_URL = 'https://docs.google.com/drawings/d/e/2PACX-1vR2w78G-PFUzH9ga7BcpbBKozwoSmPuBKf31eoslcBCoKq5xdbu1SynWkjamywYS4e2fb5UJjMaxAwH/pub?w=270&h=100';
 
 function getOrganizerState() {
     const boardItems = [];
@@ -3059,6 +3141,486 @@ document.addEventListener('click', () => {
     if (dropdown) dropdown.classList.remove('open');
 });
 
+function openExportModal() {
+    const titleInput = document.getElementById('export-title');
+    const subtitleInput = document.getElementById('export-subtitle');
+    const peopleInput = document.getElementById('export-people');
+    const notesInput = document.getElementById('export-notes');
+
+    if (titleInput) titleInput.value = '';
+    if (subtitleInput) subtitleInput.value = '';
+    if (peopleInput) peopleInput.value = '';
+    if (notesInput) notesInput.value = '';
+
+    if (subtitleInput) {
+        subtitleInput.placeholder = currentTemplate && currentTemplate !== 'blank'
+            ? `Ex. Sessió basada en la plantilla ${getTemplateLabel(currentTemplate)}`
+            : 'Ex. Sessió de treball sobre convivència, reparació i acords';
+    }
+
+    document.getElementById('export-modal-container').style.display = 'flex';
+
+    setTimeout(() => {
+        if (titleInput) titleInput.focus();
+    }, 50);
+}
+
+
+function closeExportModal() {
+    document.getElementById('export-modal-container').style.display = 'none';
+}
+
+
+function getFormattedDateTime() {
+    const now = new Date();
+    return now.toLocaleString('ca-ES', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function wrapPdfText(doc, text, x, y, maxWidth, lineHeight) {
+    if (!text) return y;
+    const lines = doc.splitTextToSize(text, maxWidth);
+    doc.text(lines, x, y);
+    return y + (lines.length * lineHeight);
+}
+
+function loadImageAsDataUrl(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+
+        img.onload = () => {
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.naturalWidth || img.width;
+                canvas.height = img.naturalHeight || img.height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                resolve(canvas.toDataURL('image/png'));
+            } catch (err) {
+                reject(err);
+            }
+        };
+
+        img.onerror = reject;
+        img.src = url;
+    });
+}
+
+function drawPdfLogo(doc, logoDataUrl, pageWidth) {
+    if (!logoDataUrl) return;
+
+    const logoW = 34;
+    const logoH = 10;
+    const x = pageWidth - 16 - logoW;
+    const y = 8;
+
+    doc.addImage(logoDataUrl, 'PNG', x, y, logoW, logoH);
+}
+
+function getBoardTagTexts(areaId) {
+    const area = document.getElementById(areaId);
+    if (!area) return [];
+
+    return Array.from(area.querySelectorAll('.organizer-tag.on-board'))
+        .map(tag => (tag.dataset.text || '').trim())
+        .filter(Boolean)
+        .map(text => text.replace(/\s+/g, ' ').trim());
+}
+
+function cleanExportTagText(text) {
+    return String(text)
+        .replace(/^📷\s*/, '')
+        .replace(/^🌼\s*/, '')
+        .replace(/[\u{1F300}-\u{1FAFF}]/gu, '')
+        .replace(/[\u2600-\u27BF]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+async function exportOrganizerPdf() {
+    const { jsPDF } = window.jspdf;
+
+    const title = sanitizeUserText(document.getElementById('export-title')?.value || '');
+    const subtitle = sanitizeUserText(document.getElementById('export-subtitle')?.value || '') || '';
+    const people = sanitizeUserText(document.getElementById('export-people')?.value || '') || '';
+    const notes = sanitizeUserText(document.getElementById('export-notes')?.value || '') || '';
+    const generatedAt = getFormattedDateTime();
+
+    if (!title) {
+        alert('Has d’indicar un nom per generar l’acta.');
+        document.getElementById('export-title')?.focus();
+        return;
+    }
+
+    const board = document.querySelector('#view-organitzador .organizer-layout');
+    if (!board) return;
+
+    const situationTexts = getBoardTagTexts('situacions-area').map(cleanExportTagText);
+    const emotionTexts = getBoardTagTexts('emocions-area-organizer').map(cleanExportTagText);
+    const needTexts = getBoardTagTexts('necessitats-area').map(cleanExportTagText);
+    const actionTexts = getBoardTagTexts('accions-area').map(cleanExportTagText);
+
+    const customSituationTexts = customSituations.map(cleanExportTagText);
+    const customActionTexts = customActions.map(cleanExportTagText);
+
+    function drawCard(doc, x, y, w, h, fillColor = [255, 255, 255], borderColor = [226, 232, 240]) {
+        doc.setFillColor(...fillColor);
+        doc.roundedRect(x, y, w, h, 4, 4, 'F');
+        doc.setDrawColor(...borderColor);
+        doc.roundedRect(x, y, w, h, 4, 4, 'S');
+    }
+
+    function drawCardTitle(doc, x, y, text) {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 0);
+        doc.text(text, x, y);
+    }
+
+    function drawCardText(doc, x, y, text, maxWidth, lineHeight = 4.8) {
+        if (!text) return y;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9.5);
+        doc.setTextColor(87, 87, 86);
+        const lines = doc.splitTextToSize(text, maxWidth);
+        doc.text(lines, x, y);
+        return y + lines.length * lineHeight;
+    }
+
+    function drawListInCard(doc, x, y, items, maxWidth, maxItems = 8) {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9.5);
+        doc.setTextColor(87, 87, 86);
+
+        if (!items.length) {
+            doc.text('—', x, y);
+            return y + 5;
+        }
+
+        const visibleItems = items.slice(0, maxItems);
+        let cursorY = y;
+
+        visibleItems.forEach(item => {
+            const lines = doc.splitTextToSize(`• ${item}`, maxWidth);
+            doc.text(lines, x, cursorY);
+            cursorY += lines.length * 4.6 + 1;
+        });
+
+        if (items.length > maxItems) {
+            doc.setTextColor(100, 116, 139);
+            doc.text(`+ ${items.length - maxItems} elements més`, x, cursorY);
+            cursorY += 5;
+        }
+
+        return cursorY;
+    }
+
+    try {
+        let logoDataUrl = null;
+        try {
+            logoDataUrl = await loadImageAsDataUrl(POLITENICS_LOGO_URL);
+        } catch (e) {
+            console.warn('No s’ha pogut carregar el logo del Politècnics');
+        }
+
+        const previousBoxShadow = board.style.boxShadow;
+        board.style.boxShadow = 'none';
+
+        const canvas = await html2canvas(board, {
+            backgroundColor: '#ffffff',
+            scale: 2,
+            useCORS: true
+        });
+
+        board.style.boxShadow = previousBoxShadow;
+
+        const imgData = canvas.toDataURL('image/png');
+
+        const pdf = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm',
+            format: 'a4'
+        });
+
+        /* =========================
+           PÀGINA 1: MAPA
+           ========================= */
+
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        const margin = 10;
+        const contentWidth = pageWidth - (margin * 2);
+
+        drawPdfLogo(pdf, logoDataUrl, pageWidth);
+
+        const headerY = 8;
+        const headerH = 24;
+
+        pdf.setFillColor(248, 250, 252);
+        pdf.roundedRect(margin, headerY, pageWidth - (margin * 2), headerH, 5, 5, 'F');
+
+        pdf.setDrawColor(226, 232, 240);
+        pdf.roundedRect(margin, headerY, pageWidth - (margin * 2), headerH, 5, 5, 'S');
+
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(18);
+        pdf.setTextColor(0, 0, 0);
+        pdf.text(title, margin + 4, headerY + 8);
+
+
+        if (subtitle) {
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(10);
+            pdf.setTextColor(87, 87, 86);
+            pdf.text(subtitle, margin + 4, headerY + 14);
+        }
+
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(8.5);
+        pdf.setTextColor(100, 116, 139);
+        pdf.text(`Generat: ${generatedAt}`, margin + 4, headerY + 20);
+
+        const imgProps = pdf.getImageProperties(imgData);
+
+        const frameY = headerY + headerH + 4;
+        const frameH = pageHeight - frameY - 10;
+
+        const maxImgWidth = contentWidth - 4;
+        const maxImgHeight = frameH - 4;
+
+        let imgWidth = maxImgWidth;
+        let imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+        if (imgHeight > maxImgHeight) {
+            imgHeight = maxImgHeight;
+            imgWidth = (imgProps.width * imgHeight) / imgProps.height;
+        }
+
+        const frameX = margin;
+        const imgX = frameX + ((contentWidth - imgWidth) / 2);
+        const imgY = frameY + ((frameH - imgHeight) / 2);
+
+        pdf.setFillColor(255, 255, 255);
+        pdf.roundedRect(frameX, frameY, contentWidth, frameH, 5, 5, 'F');
+        pdf.setDrawColor(226, 232, 240);
+        pdf.roundedRect(frameX, frameY, contentWidth, frameH, 5, 5, 'S');
+
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth, imgHeight);
+
+        /* =========================
+           PÀGINA 2: ACTA VISUAL
+           ========================= */
+
+        pdf.addPage('a4', 'portrait');
+
+
+        const p2w = pdf.internal.pageSize.getWidth();
+        const p2h = pdf.internal.pageSize.getHeight();
+        const m = 14;
+        const usableW = p2w - (m * 2);
+
+        drawPdfLogo(pdf, logoDataUrl, p2w);
+
+        let y = 14;
+
+        drawCard(pdf, m, y, usableW, 24, [248, 250, 252]);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(16);
+        pdf.setTextColor(0, 0, 0);
+        pdf.text('Acta de la sessió', m + 4, y + 8);
+
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        pdf.setTextColor(100, 116, 139);
+        pdf.text(`Generat: ${generatedAt}`, m + 4, y + 15);
+
+        y += 30;
+
+        const statW = (usableW - 9) / 4;
+        const statData = [
+            ['Situacions', situationTexts.length],
+            ['Emocions', emotionTexts.length],
+            ['Necessitats', needTexts.length],
+            ['Accions', actionTexts.length]
+        ];
+
+        statData.forEach((item, index) => {
+            const x = m + index * (statW + 3);
+
+            drawCard(pdf, x, y, statW, 18, [255, 255, 255]);
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(14);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text(String(item[1]), x + 4, y + 8);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(8);
+            pdf.setTextColor(100, 116, 139);
+            pdf.text(item[0], x + 4, y + 14);
+        });
+
+        y += 24;
+
+        const colGap = 6;
+        const colW = (usableW - colGap) / 2;
+        const leftX = m;
+        const rightX = m + colW + colGap;
+
+        let leftY = y;
+        let rightY = y;
+
+        /* Columna izquierda */
+        drawCard(pdf, leftX, leftY, colW, 34, [255, 255, 255]);
+        drawCardTitle(pdf, leftX + 4, leftY + 8, 'Fitxa');
+        let tmpY = leftY + 15;
+        tmpY = drawCardText(pdf, leftX + 4, tmpY, `Nom: ${title}`, colW - 8);
+        if (subtitle) tmpY = drawCardText(pdf, leftX + 4, tmpY + 1, `Descripció: ${subtitle}`, colW - 8);
+        if (people) tmpY = drawCardText(pdf, leftX + 4, tmpY + 1, `Persones / equips: ${people}`, colW - 8);
+        leftY += 40;
+
+        drawCard(pdf, leftX, leftY, colW, 28, [248, 250, 252]);
+        drawCardTitle(pdf, leftX + 4, leftY + 8, 'Context');
+        drawCardText(
+            pdf,
+            leftX + 4,
+            leftY + 15,
+            currentTemplate && currentTemplate !== 'blank'
+                ? `Plantilla utilitzada: ${getTemplateLabel(currentTemplate)}`
+                : 'Plantilla utilitzada: En blanc',
+            colW - 8
+        );
+        leftY += 34;
+
+        drawCard(pdf, leftX, leftY, colW, 55, [255, 247, 247]);
+        drawCardTitle(pdf, leftX + 4, leftY + 8, 'Situacions');
+        drawListInCard(pdf, leftX + 4, leftY + 15, situationTexts, colW - 8, 7);
+
+        /* Columna derecha */
+        drawCard(pdf, rightX, rightY, colW, 42, [248, 252, 255]);
+        drawCardTitle(pdf, rightX + 4, rightY + 8, 'Observacions');
+        drawCardText(pdf, rightX + 4, rightY + 15, notes || 'Sense observacions.', colW - 8);
+        rightY += 48;
+
+        drawCard(pdf, rightX, rightY, colW, 40, [253, 250, 255]);
+        drawCardTitle(pdf, rightX + 4, rightY + 8, 'Emocions');
+        drawListInCard(pdf, rightX + 4, rightY + 15, emotionTexts, colW - 8, 5);
+        rightY += 46;
+
+        drawCard(pdf, rightX, rightY, colW, 40, [248, 252, 255]);
+        drawCardTitle(pdf, rightX + 4, rightY + 8, 'Necessitats');
+        drawListInCard(pdf, rightX + 4, rightY + 15, needTexts, colW - 8, 5);
+        rightY += 46;
+
+        drawCard(pdf, rightX, rightY, colW, 40, [255, 250, 245]);
+        drawCardTitle(pdf, rightX + 4, rightY + 8, 'Accions');
+        drawListInCard(pdf, rightX + 4, rightY + 15, actionTexts, colW - 8, 5);
+
+        /* =========================
+           PÀGINA 3: DETALL EXTRA
+           ========================= */
+
+        pdf.addPage('a4', 'portrait');
+
+        const p3w = pdf.internal.pageSize.getWidth();
+        const p3h = pdf.internal.pageSize.getHeight();
+        const p3m = 14;
+        const p3usableW = p3w - (p3m * 2);
+
+        drawPdfLogo(pdf, logoDataUrl, p3w);
+
+        let p3y = 14;
+
+        drawCard(pdf, p3m, p3y, p3usableW, 20, [248, 250, 252]);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(15);
+        pdf.setTextColor(0, 0, 0);
+        pdf.text('Detall del mapa', p3m + 4, p3y + 8);
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        pdf.setTextColor(100, 116, 139);
+        pdf.text('Elements recollits durant la sessió', p3m + 4, p3y + 15);
+
+        p3y += 26;
+
+        function drawDetailBox(titleText, items, fillColor) {
+            const boxH = 52;
+            drawCard(pdf, p3m, p3y, p3usableW, boxH, fillColor);
+            drawCardTitle(pdf, p3m + 4, p3y + 8, titleText);
+            drawListInCard(pdf, p3m + 4, p3y + 15, items, p3usableW - 8, 8);
+            p3y += boxH + 6;
+        }
+
+        drawDetailBox('Situacions del mapa', situationTexts, [255, 247, 247]);
+        drawDetailBox('Emocions del mapa', emotionTexts, [253, 250, 255]);
+        drawDetailBox('Necessitats del mapa', needTexts, [248, 252, 255]);
+        drawDetailBox('Accions del mapa', actionTexts, [255, 250, 245]);
+
+        if (customSituationTexts.length || customActionTexts.length) {
+            pdf.addPage('a4', 'portrait');
+
+            const p4w = pdf.internal.pageSize.getWidth();
+            const p4m = 14;
+            const p4usableW = p4w - (p4m * 2);
+
+            drawPdfLogo(pdf, logoDataUrl, p4w);
+
+            let p4y = 14;
+
+            drawCard(pdf, p4m, p4y, p4usableW, 20, [248, 250, 252]);
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(15);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Elements creats durant la sessió', p4m + 4, p4y + 8);
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(9);
+            pdf.setTextColor(100, 116, 139);
+            pdf.text('Banc personalitzat de la sessió', p4m + 4, p4y + 15);
+
+            p4y += 26;
+
+            if (customSituationTexts.length) {
+                drawCard(pdf, p4m, p4y, p4usableW, 60, [255, 247, 247]);
+                drawCardTitle(pdf, p4m + 4, p4y + 8, 'Situacions donades d’alta al banc');
+                drawListInCard(pdf, p4m + 4, p4y + 15, customSituationTexts, p4usableW - 8, 10);
+                p4y += 66;
+            }
+
+            if (customActionTexts.length) {
+                drawCard(pdf, p4m, p4y, p4usableW, 60, [255, 250, 245]);
+                drawCardTitle(pdf, p4m + 4, p4y + 8, 'Accions donades d’alta al banc');
+                drawListInCard(pdf, p4m + 4, p4y + 15, customActionTexts, p4usableW - 8, 10);
+            }
+        }
+
+        const safeFileName = title
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            || 'acta-mapa';
+
+        pdf.save(`${safeFileName}.pdf`);
+        closeExportModal();
+
+    } catch (error) {
+        console.error('Error generant el PDF:', error);
+        alert('No s’ha pogut generar el PDF.');
+    }
+}
+
+
+
+
 window.addEventListener('beforeunload', saveOrganizerState);
 
 window.onload = () => {
@@ -3074,5 +3636,7 @@ window.onload = () => {
 
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </body>
 </html>
