@@ -654,7 +654,7 @@
             border: 2px solid #cfead6;
             padding: 18px;
             border-radius: 18px;
-            margin: 10px 0 0 0;
+            margin: 10px 0 14px 0;
             text-align: center;
         }
 
@@ -1276,6 +1276,14 @@
     background: #ffe5e5;
 }
 
+.accordion-content {
+    display: none;
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+}
+
 
 
     </style>
@@ -1298,10 +1306,10 @@
 
     <nav class="nav-container">
         <button class="nav-btn primary active" id="btn-home" onclick="showView('home')">
-            <i class="fa-solid fa-house"></i> Home
+            <i class="fa-solid fa-house"></i> Inici
         </button>
         <button class="nav-btn primary" id="btn-organitzador" onclick="showView('organitzador')">
-            <i class="fa-solid fa-table-cells-large"></i> Organitzador
+            <i class="fa-solid fa-table-cells-large"></i> Mapa de conversa
         </button>
         <button class="nav-btn primary" id="btn-situacions" onclick="showView('situacions')">
             <i class="fa-solid fa-camera"></i> Situacions
@@ -1311,13 +1319,14 @@
 
         <button class="nav-btn" id="btn-cnv" onclick="showView('cnv')">CNV</button>
         <button class="nav-btn" id="btn-grow" onclick="showView('grow')">GROW</button>
-        <button class="nav-btn" id="btn-servei" onclick="showView('servei')">Servei</button>
+        <button class="nav-btn" id="btn-servei" onclick="showView('servei')">Lideratge servei</button>
+        <button class="nav-btn" id="btn-af" onclick="showView('af')">Anàlisi funcional</button>
 
         <div class="nav-divider"></div>
 
         <button class="nav-btn primary" id="btn-frase" onclick="showView('frase')">FRASE</button>
         <button class="nav-btn primary" id="btn-model" onclick="showView('model')">
-            <i class="fa-solid fa-list-ol"></i> 13 Etapes
+            <i class="fa-solid fa-list-ol"></i> 13 etapes
         </button>
     </nav>
 
@@ -1328,7 +1337,7 @@
     <div class="pillar-card pillar-para">
         <div class="pillar-top">
             <h3 class="pillar-title">📷 PARA</h3>
-            <small>Aturar l'impuls</small>
+            <small>Atura l'impuls</small>
 
             <p class="pillar-desc">
                 Intervenir en calent ens porta a la reacció impulsiva. Parar és regular-nos per poder actuar millor.
@@ -1346,7 +1355,7 @@
 
             <div class="pillar-links">
                 <button class="pillar-link" onclick="showView('situacions')">Situacions</button>
-                <button class="pillar-link" onclick="showView('organitzador')">Organitzador</button>
+                <button class="pillar-link" onclick="showView('organitzador')">Mapa de conversa</button>
             </div>
         </div>
     </div>
@@ -1354,7 +1363,7 @@
     <div class="pillar-card pillar-parla">
         <div class="pillar-top">
             <h3 class="pillar-title">💬 PARLA</h3>
-            <small>Donar veu real</small>
+            <small>Dona veu real</small>
 
             <p class="pillar-desc">
                 No és només deixar parlar, és escoltar de veritat. Aquí passem de jutjar a entendre.
@@ -1375,8 +1384,8 @@
             <div class="pillar-links">
                 <button class="pillar-link" onclick="showView('cnv')">CNV</button>
                 <button class="pillar-link" onclick="showView('grow')">GROW</button>
-                <button class="pillar-link" onclick="showView('servei')">Servei</button>
-                <button class="pillar-link" onclick="showView('organitzador')">Organitzador</button>
+                <button class="pillar-link" onclick="showView('servei')">Lideratge servei</button>
+                <button class="pillar-link" onclick="showView('organitzador')">Mapa de conversa</button>
             </div>
         </div>
     </div>
@@ -1384,7 +1393,7 @@
     <div class="pillar-card pillar-pacta">
         <div class="pillar-top">
             <h3 class="pillar-title">🤝 PACTA</h3>
-            <small>Responsabilitat i compromís</small>
+            <small>Construeix compromís</small>
 
             <p class="pillar-desc">
                 No busquem el càstig, busquem la reparació construïda. Responsabilitat no és culpa: és capacitat d’actuar.
@@ -1402,7 +1411,7 @@
             </div>
 
             <div class="pillar-links">
-                <button class="pillar-link" onclick="showView('organitzador')">Organitzador</button>
+                <button class="pillar-link" onclick="showView('organitzador')">Mapa de conversa</button>
             </div>
         </div>
     </div>
@@ -1414,15 +1423,15 @@
     <div class="card">
         <h2>Situacions</h2>
         <p id="situations-intro" style="margin-top:-4px; margin-bottom:18px;">
-            Identifica quin tipus de situació tens al davant per decidir des d’on començar.
+            Identifica què està passant exactament (fets, conductes o moments concrets) per decidir des d’on començar.
         </p>
 
         <div class="situations-switcher">
             <button class="situations-switch-btn active" id="btn-situation-blocking" onclick="setSituationMode('blocking')">
-                Bloquejants
+                Situacions que bloquegen
             </button>
             <button class="situations-switch-btn" id="btn-situation-facilitating" onclick="setSituationMode('facilitating')">
-                Facilitadores
+                Situacions que faciliten
             </button>
         </div>
 
@@ -1433,11 +1442,11 @@
 <div id="view-organitzador" style="display:none;">
     <div class="card">
         <div class="organizer-title-row">
-            <h2><i class="fa-solid fa-table-cells-large"></i> Organitzador gràfic interactiu</h2>
+            <h2><i class="fa-solid fa-table-cells-large"></i> Mapa de conversa</h2>
 
             <div class="organizer-actions">
                 <button class="mini-action-btn organizer-export-btn" onclick="openExportModal()">
-                    <i class="fa-solid fa-file-pdf"></i> Descarregar en PDF
+                    <i class="fa-solid fa-file-pdf"></i> Exportar PDF
                 </button>
 
                 <button class="mini-action-btn organizer-clear-btn" onclick="handleClearOrganizer()">
@@ -1547,7 +1556,7 @@
                                 type="text"
                                 id="need-search-input"
                                 class="emotion-search-input"
-                                placeholder="Cercar necessitat..."
+                                placeholder="Cercar..."
                                 oninput="setNeedSearch(this.value)">
                         </div>
 
@@ -1559,7 +1568,7 @@
                     <button class="bank-accordion-header" onclick="toggleBankAccordion('acc-accions')">
                         <span class="left">
                             <span>🌼</span>
-                            <span>Estratègies / Accions</span>
+                            <span>Accions</span>
                             <span class="bank-indicator" id="bank-accions" title="Hi ha elements al banc"></span>
                             <span class="count-badge" id="count-accions">0</span>
                         </span>
@@ -1585,7 +1594,7 @@
 
                         <div class="template-dropdown">
                             <button id="template-button" class="quadrant-template-btn" onclick="toggleTemplateMenu(event)">
-                                <span id="template-button-label">Carregar plantilla</span>
+                                <span id="template-button-label">Aplicar plantilla</span>
                                 <i class="fa-solid fa-chevron-down template-caret"></i>
                             </button>
 
@@ -1594,7 +1603,7 @@
                         </div>
 
                         <div class="drop-note" id="hint-situacions">
-                            Només situacions
+                            Afegeix situacions
                         </div>
                     </div>
 
@@ -1614,7 +1623,7 @@
                         <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
 
                         <div class="drop-note" id="hint-emocions">
-                            Només emocions
+                            Afegeix emocions
                         </div>
                     </div>
 
@@ -1634,7 +1643,7 @@
                         <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
 
                         <div class="drop-note" id="hint-necessitats">
-                            Només necessitats
+                            Afegeix necessitats
                         </div>
                     </div>
 
@@ -1648,13 +1657,13 @@
                     <div class="quadrant-header">
                         <div class="quadrant-title">
                             <span>🌼</span>
-                            <span>Estratègies / Accions</span>
+                            <span>Accions</span>
                         </div>
 
                         <span class="quadrant-template-btn" style="visibility:hidden;">Plantilla</span>
 
                         <div class="drop-note" id="hint-accions">
-                            Només accions
+                            Afegeix accions
                         </div>
                     </div>
 
@@ -1667,9 +1676,9 @@
 
         <div id="view-model" style="display:none;">
             <div class="card">
-                <h2>El camí de les 13 Etapes</h2>
+                <h2>Les 13 etapes</h2>
                 <div class="section-stack">
-                    <p class="section-subintro">Vista ràpida de totes les etapes amb un element visual i una frase de context.</p>
+                    <p class="section-subintro">Recorregut visual de les 13 etapes per orientar la conversa i veure com pot avançar.</p>
                     <div class="method-grid" id="model-grid"></div>
                 </div>
             </div>
@@ -1679,7 +1688,7 @@
             <div class="card">
                 <h2>Metodologia CNV</h2>
                 <div class="section-stack">
-                    <p class="section-subintro">Les etapes vinculades a la Comunicació No Violenta, amb lectura visual ràpida.</p>
+                    <p class="section-subintro">Etapes vinculades a la Comunicació No Violenta.</p>
                     <div class="method-grid" id="cnv-grid"></div>
                 </div>
             </div>
@@ -1689,7 +1698,7 @@
             <div class="card">
                 <h2>Metodologia GROW</h2>
                 <div class="section-stack">
-                    <p class="section-subintro">Les etapes vinculades al model GROW, amb icona i frase de context.</p>
+                    <p class="section-subintro">Etapes  vinculades al model GROW.</p>
                     <div class="method-grid" id="grow-grid"></div>
                 </div>
             </div>
@@ -1699,7 +1708,7 @@
             <div class="card">
                 <h2>Lideratge al Servei</h2>
                 <div class="section-stack">
-                    <p class="section-subintro">Les etapes on el lideratge al servei pren més pes en l’acompanyament.</p>
+                    <p class="section-subintro">Etapes vinculades a la idea de lideratge al servei.</p>
                     <div class="method-grid" id="servei-grid"></div>
                 </div>
             </div>
@@ -1708,9 +1717,914 @@
         <div id="view-frase" style="display:none;">
             <div class="card">
                 <h2>Model FRASE</h2>
-                <div class="frase-invers-grid" id="frase-invers-list"></div>
+                <div class="section-stack">
+                    <p class="section-subintro">Etapes vinculades a la FRASE del Politècnics.</p>
+                    <div class="frase-invers-grid" id="frase-invers-list"></div>
+                </div>
             </div>
         </div>
+
+       <div id="view-af" style="display:none;">
+    <div class="card">
+        <h2>Anàlisi funcional</h2>
+
+        <p class="section-subintro">
+            Com entendre què passa en una situació, situar-la dins les 13 etapes i fer-la avançar amb el mapa de conversa.
+        </p>
+
+        <div class="main-question-card">
+            <div class="main-question-text">
+                PARA · PARLA · PACTA: aturar, comprendre i transformar en acció.
+            </div>
+        </div>
+
+        <div class="accordion">
+
+            <!-- 1 -->
+            <div class="accordion-item">
+    <div class="accordion-header">1. Com es fa servir (flux de treball)</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        En qualsevol situació —tant si funciona com si es bloqueja— és útil aturar-se, parlar i arribar a acords.
+        </p>
+        <p>
+        El repte no és si parlar o no, sinó <strong>com parlar en cada moment</strong>.
+        </p>
+
+        <!-- 🟨 QUADRE VISUAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-rotate"></i>
+                <span>PARA · PARLA · PACTA (motor constant)</span>
+            </div>
+
+            <div style="font-size:0.9rem; line-height:1.5;">
+                <p><strong>PARA</strong> → atura la reacció automàtica</p>
+                <p><strong>PARLA</strong> → obre espai de comprensió</p>
+                <p><strong>PACTA</strong> → transforma en acció compartida</p>
+            </div>
+        </div>
+
+        
+
+        <div class="info-card soft-green" style="margin-top:12px;">
+    <div class="info-title">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <span>Situar la conversa</span>
+    </div>
+
+    <p>
+    No totes les situacions es poden abordar de la mateixa manera.
+    </p>
+
+    <div class="meta-list">
+        <div class="meta-row">
+            <strong>1</strong>
+            <span>Detectar si la situació és bloquejant o facilitadora</span>
+        </div>
+        <div class="meta-row">
+            <strong>2</strong>
+            <span>Identificar en quina de les 13 etapes es troba la conversa</span>
+        </div>
+    </div>
+
+    <p style="margin-top:8px;">
+    Això permet ajustar les preguntes i les accions al moment real de la conversa.
+    </p>
+</div>
+        <!-- 🟩 TEXT RIGORÓS -->
+        <p style="margin-top:12px;">
+        L’anàlisi funcional no indica què s’ha de dir, sinó que ajuda a entendre què està passant i a ajustar la intervenció.
+        </p>
+
+        <p>
+        En aquest sistema, això es concreta en dos moviments:
+        </p>
+
+        <ul>
+            <li>
+                <strong>Situar la conversa</strong> amb les situacions bloquejants o facilitadores i les 13 etapes.
+            </li>
+            <li>
+                <strong>Construir el mapa</strong amb situacions, emocions, necessitats i accions.
+            </li>
+        </ul>
+
+        <p>
+        A partir d’aquí, PARA · PARLA · PACTA permet avançar de manera ajustada a cada moment.
+        </p>
+
+        <!-- 🔴 EXEMPLE REAL -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Exemple real</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Un equip evita parlar d’un problema que es repeteix.</p>
+
+            <p><strong>Lectura inicial</strong><br>
+            Situació bloquejant → resistència / evitació (etapa 1–2)</p>
+
+            <p><strong>Com s’aplica PARA · PARLA · PACTA</strong></p>
+            <ul>
+                <li>PARA → no forçar solucions immediates</li>
+                <li>PARLA → obrir espai per expressar què està passant</li>
+                <li>PACTA → acordar un primer pas petit i viable</li>
+            </ul>
+
+            <p>
+            Si es parlés com si fos etapa 8 (decidir), la conversa probablement es bloquejaria més.
+            </p>
+        </div>
+
+        <!-- 🧪 DETECCIÓ -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Clau de lectura</span>
+            </div>
+
+            <p>
+            No es tracta d’aplicar un guió fix, sinó d’ajustar la conversa al moment.
+            </p>
+
+            <p><strong>Error habitual</strong><br>
+            Intentar decidir (etapa 8) quan encara no s’ha entès què passa (etapes 1–3).</p>
+
+            <p><strong>Lectura ajustada</strong><br>
+            Detectar la situació i treballar des de l’etapa corresponent.</p>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+            <!-- 2 -->
+<div class="accordion-item">
+    <div class="accordion-header">2. Què és l’anàlisi funcional</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        Quan una situació es complica, és habitual intentar explicar-la ràpidament o buscar culpables.
+        </p>
+        <p>
+        L’anàlisi funcional proposa una altra mirada: entendre què està passant a partir de la relació entre la situació, les accions i els seus efectes.
+        </p>
+
+        <!-- 🟨 QUADRE VISUAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>Lectura funcional d’una situació</span>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-row">
+                    <strong>Situació</strong>
+                    <span>Què està passant</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Resposta</strong>
+                    <span>Què es fa o es diu</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Factors</strong>
+                    <span>Emocions i necessitats que influeixen</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Efectes</strong>
+                    <span>Què passa després</span>
+                </div>
+            </div>
+
+            <p style="margin-top:8px;">
+            Aquesta lectura no dona respostes automàtiques, però permet entendre millor com intervenir.
+            </p>
+        </div>
+
+        <!-- 🟩 TEXT RIGORÓS -->
+        <p style="margin-top:12px;">
+        L’anàlisi funcional és un enfocament utilitzat en psicologia i educació per analitzar el comportament en relació amb el seu context.
+        </p>
+
+        <p>
+        En lloc de preguntar “per què és així una persona?”, es centra en:
+        </p>
+
+        <ul>
+            <li>què està passant</li>
+            <li>què es fa davant d’això</li>
+            <li>què està mantenint la situació</li>
+            <li>què podria ajudar a canviar-la</li>
+        </ul>
+
+        <p>
+        Aquesta manera de llegir les situacions permet ajustar la conversa sense caure en judicis o interpretacions precipitades.
+        </p>
+
+        <!-- 🔁 VINCULACIÓ AMB L’EINA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-link"></i>
+                <span>Com es concreta en aquest sistema</span>
+            </div>
+
+            <ul>
+                <li>
+                    Permet <strong>situar la conversa</strong>: identificar si la situació és bloquejant o facilitadora i en quina etapa es troba.
+                </li>
+                <li>
+                    La lectura funcional s’inicia detectant si la situació és <strong>bloquejant o facilitadora</strong>.
+                </li>
+                <li>
+                    Es concreta situant la conversa en una de les <strong>13 etapes</strong>.
+                </li>
+                <li>
+                    Es fa visible amb el <strong>mapa de conversa</strong> (situacions, emocions, necessitats i accions).
+                </li>
+                <li>
+                    Permet ajustar com es parla i què es proposa en cada moment.
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="info-card soft-violet" style="margin-top:14px;">
+    <div class="info-title">
+        <i class="fa-solid fa-people-arrows"></i>
+        <span>Dimensió relacional</span>
+    </div>
+
+    <p>
+    Aquesta lectura també permet entendre des d’on s’està vivint la relació.
+    </p>
+
+    <div class="meta-list">
+        <div class="meta-row">
+            <strong>CNV</strong>
+            <span>Quan hi ha bloqueig, tensió o dificultat per connectar</span>
+        </div>
+        <div class="meta-row">
+            <strong>GROW</strong>
+            <span>Quan hi ha espai per treballar i avançar</span>
+        </div>
+        <div class="meta-row">
+            <strong>Lideratge servei</strong>
+            <span>Quan hi ha corresponsabilitat i compromís compartit</span>
+        </div>
+    </div>
+
+    <p style="margin-top:8px;">
+    Això ajuda a ajustar com parlar i com avançar en cada situació.
+    </p>
+</div>
+
+        <!-- 🔴 EXEMPLE REAL -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Exemple real</span>
+            </div>
+
+            <p><strong>Lectura interpretativa</strong><br>
+            “No vol treballar”</p>
+
+            <p><strong>Lectura funcional</strong><br>
+            “No inicia la tasca i es desconnecta quan rep indicacions”</p>
+
+            <p>
+            La segona permet situar millor la conversa i actuar amb més precisió.
+            </p>
+
+            <p><strong>Situació dins les etapes</strong><br>
+            Etapes 1–3: encara no està clar què passa ni com abordar-ho.</p>
+
+        </div>
+
+        <!-- 🧪 CLAU PEDAGÒGICA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Clau per entendre-ho bé</span>
+            </div>
+
+            <p>
+            L’anàlisi funcional no diu què s’ha de fer, però ajuda a decidir com intervenir en cada moment.
+            </p>
+
+            <p>
+            Permet entendre la situació per poder decidir com parlar i com avançar.
+            </p>
+
+            <p>
+            En aquest sistema, això es fa combinant:
+            </p>
+
+            <ul>
+                <li>la lectura de la situació</li>
+                <li>la posició dins les 13 etapes</li>
+                <li>la construcció del mapa de conversa</li>
+            </ul>
+
+        </div>
+
+        <!-- 📚 REFERÈNCIA SUAU -->
+        <p style="margin-top:14px; font-size:0.85rem; color:var(--cep-grey);">
+        Aquest enfocament s’inspira en models d’anàlisi funcional del comportament i en pràctiques educatives basades en l’observació i la intervenció contextual.
+        </p>
+
+    </div>
+</div>           
+
+
+
+
+            <!-- 3 -->
+<div class="accordion-item">
+    <div class="accordion-header">3. Com està construït el mapa de conversa</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        El mapa de conversa no és només una manera d’organitzar informació, sinó una eina per entendre què està passant i com avançar.
+        </p>
+        <p>
+        Està construït seguint una lògica que permet relacionar situacions, accions i factors rellevants, i alhora entendre el tipus de relació que s’està donant.
+        </p>
+
+        <!-- 🟨 QUADRE VISUAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-map"></i>
+                <span>Estructura del mapa de conversa</span>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-row">
+                    <strong>Situacions</strong>
+                    <span>Què està passant</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Emocions</strong>
+                    <span>Com s’està vivint</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Necessitats</strong>
+                    <span>Què és important o falta</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Accions</strong>
+                    <span>Què s’ha fet o es pot fer</span>
+                </div>
+            </div>
+
+            <p style="margin-top:8px;">
+            Aquestes quatre parts permeten construir una visió compartida de la situació.
+            </p>
+        </div>
+
+        <!-- 🟩 TEXT RIGORÓS -->
+        <p style="margin-top:12px;">
+        Aquestes parts segueixen una lògica funcional: permeten entendre la relació entre què passa, què es fa i què influeix en la situació.
+        </p>
+
+        <ul>
+            <li><strong>Situacions</strong> → fan visibles els fets</li>
+            <li><strong>Accions</strong> → mostren què s’està fent o evitant</li>
+            <li><strong>Emocions i necessitats</strong> → ajuden a entendre què està en joc i què pot desbloquejar la situació</li>
+            <li><strong>Relació entre aquests elements</strong> → ajuda a entendre què manté o desbloqueja la situació</li>
+        </ul>
+
+        <p>
+        El valor del mapa no és només recollir informació, sinó fer visibles aquestes relacions.
+        </p>
+        <p>
+Això permet identificar on intervenir: si cal entendre millor la situació, ajustar accions o treballar factors que estan influint.
+</p>
+
+        <!-- 🔁 RELACIÓ AMB ETAPES -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-link"></i>
+                <span>Relació amb les 13 etapes</span>
+            </div>
+
+            <ul>
+                <li>Etapes <strong>1–3</strong> → ajuden a descriure situacions amb claredat</li>
+                <li>Etapes <strong>4–6</strong> → ajuden a entendre la realitat i el marge d’acció</li>
+                <li>Etapes <strong>7–10</strong> → ajuden a definir accions concretes</li>
+                <li>Etapes <strong>11–13</strong> → ajuden a revisar i sostenir el procés</li>
+            </ul>
+
+            <p>
+            El mapa aporta la informació; les etapes ajuden a decidir com avançar.
+            </p>
+        </div>
+
+        <!-- 🟣 DIMENSIÓ RELACIONAL -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-people-arrows"></i>
+                <span>Dimensió relacional</span>
+            </div>
+
+            <p>
+            El mapa de conversa no només ajuda a entendre què passa, sinó també des d’on s’està vivint la relació.
+            </p>
+
+            <div class="meta-list">
+                <div class="meta-row">
+                    <strong>CNV</strong>
+                    <span>Quan hi ha bloqueig, tensió o dificultat per connectar</span>
+                </div>
+                <div class="meta-row">
+                    <strong>GROW</strong>
+                    <span>Quan hi ha espai per avançar i treballar la situació</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Lideratge servei</strong>
+                    <span>Quan hi ha corresponsabilitat i compromís compartit</span>
+                </div>
+            </div>
+
+            <p style="margin-top:8px;">
+            Aquest recorregut ajuda a entendre com ajustar la conversa segons el moment, sense que sigui un camí lineal ni obligatori.
+            </p>
+        </div>
+
+        <!-- 🔴 EXEMPLE REAL -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Exemple real</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Les reunions s’allarguen i no es prenen decisions.</p>
+
+            <p><strong>Emocions</strong><br>
+            Frustració, cansament.</p>
+
+            <p><strong>Necessitats</strong><br>
+            Claredat, eficiència, tancament.</p>
+
+            <p><strong>Accions</strong><br>
+            Es parla molt però no es concreten acords.</p>
+
+            <p>
+            El mapa permet veure que el problema no és només la situació, sinó la relació entre accions i necessitats no cobertes.
+            </p>
+
+            <p><strong>Lectura relacional</strong><br>
+            Moment GROW → hi ha espai per treballar, però falta estructura.</p>
+
+            <p><strong>Etapes relacionades</strong><br>
+            Etapes 4–6: falta de focus i concreció.</p>
+
+        </div>
+
+        <!-- 🧪 CLAU PEDAGÒGICA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Clau per fer-lo servir bé</span>
+            </div>
+
+            <p>
+            Un mapa és útil quan ajuda a entendre relacions, no només quan recull informació.
+            </p>
+
+            <p><strong>Error habitual</strong><br>
+            Omplir els quadrants com si fossin llistes independents.</p>
+
+            <p><strong>Ús ajustat</strong><br>
+            Utilitzar el mapa per veure com una cosa influeix en una altra i des d’on es pot treballar millor la situació.</p>
+
+        </div>
+
+    </div>
+</div>
+
+            <!-- 4 -->
+<div class="accordion-item">
+    <div class="accordion-header">4. Com ajuden les 13 etapes</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        Les 13 etapes no només serveixen per ordenar una conversa, sinó per fer avançar la relació.
+        </p>
+        <p>
+        Permeten passar de situacions de bloqueig o tensió a espais de corresponsabilitat i compromís compartit.
+        </p>
+
+        <!-- 🟨 QUADRE VISUAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-arrow-right"></i>
+                <span>Recorregut de la relació</span>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-row">
+                    <strong>CNV</strong>
+                    <span>Quan hi ha bloqueig, tensió o dificultat per connectar</span>
+                </div>
+                <div class="meta-row">
+                    <strong>GROW</strong>
+                    <span>Procés de treball, presa de consciència i avanç</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Lideratge servei</strong>
+                    <span>Corresponsabilitat i compromís compartit</span>
+                </div>
+            </div>
+
+            <p style="margin-top:8px;">
+            Les 13 etapes permeten moure’s dins d’aquest recorregut.
+            </p>
+        </div>
+
+        <!-- 🟩 TEXT RIGORÓS -->
+        <p style="margin-top:12px;">
+        No totes les situacions es troben en el mateix punt.
+        </p>
+
+        <p>
+        Quan hi ha tensió o bloqueig, cal primer recuperar la connexió (CNV).
+        Quan hi ha espai, es pot treballar la situació i avançar (GROW).
+        Quan hi ha maduresa relacional, es poden assumir responsabilitats compartides (Lideratge servei).
+        </p>
+
+        <p>
+        Les 13 etapes permeten identificar en quin moment es troba la conversa i ajustar com intervenir.
+        </p>
+
+        <ul>
+            <li>Etapes <strong>1–3</strong> → obrir i entendre (sortir del bloqueig)</li>
+            <li>Etapes <strong>4–6</strong> → aclarir realitat i responsabilitat</li>
+            <li>Etapes <strong>7–10</strong> → generar i concretar accions</li>
+            <li>Etapes <strong>11–13</strong> → sostenir i consolidar el canvi</li>
+        </ul>
+
+        <p>
+        Aquest procés no és lineal ni obligatori, però orienta el recorregut possible de la conversa.
+        </p>
+
+        <!-- 🔁 RELACIÓ AMB MAPA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-link"></i>
+                <span>Relació amb el mapa de conversa</span>
+            </div>
+
+            <p>
+            El mapa mostra què està passant.
+            </p>
+
+            <p>
+            Les etapes permeten decidir com avançar i des d’on treballar la relació.
+            </p>
+
+        </div>
+
+        <!-- 🔴 EXEMPLE REAL -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Exemple real</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Un equip evita parlar d’un conflicte que es repeteix.</p>
+
+            <p><strong>Moment relacional</strong><br>
+            CNV → hi ha evitació i tensió.</p>
+
+            <p><strong>Treball inicial</strong><br>
+            Etapes 1–3 → obrir espai, observar i entendre.</p>
+
+            <p><strong>Evolució</strong><br>
+            Passar a GROW → començar a aclarir i treballar la situació (etapes 4–6).</p>
+
+            <p><strong>Objectiu</strong><br>
+            Arribar a Lideratge servei → poder assumir acords i responsabilitats compartides.</p>
+
+        </div>
+
+        <!-- 🧪 CLAU PEDAGÒGICA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Clau per fer-les servir bé</span>
+            </div>
+
+            <p>
+            El problema no és la situació, sinó voler avançar des d’un punt que no toca.
+            </p>
+
+            <p><strong>Error habitual</strong><br>
+            Intentar acordar accions quan encara hi ha tensió o manca de connexió.</p>
+
+            <p><strong>Ús ajustat</strong><br>
+            Detectar el moment relacional i treballar des d’allà.</p>
+
+        </div>
+
+    </div>
+</div>
+
+
+            <!-- 5 -->
+<div class="accordion-item">
+    <div class="accordion-header">5. Com detectar on estàs i què fer</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        No totes les situacions requereixen el mateix tipus de conversa.
+        </p>
+        <p>
+        Detectar on estàs permet ajustar com parlar, què preguntar i quin tipus d’accions proposar.
+        </p>
+
+        <!-- 🟨 QUADRE VISUAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-compass"></i>
+                <span>Lectura ràpida de la situació</span>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-row">
+                    <strong>CNV</strong>
+                    <span>Hi ha tensió o bloqueig → cal reconnectar</span>
+                </div>
+                <div class="meta-row">
+                    <strong>GROW</strong>
+                    <span>Hi ha espai → cal treballar i avançar</span>
+                </div>
+                <div class="meta-row">
+                    <strong>Lideratge servei</strong>
+                    <span>Hi ha compromís → cal sostenir i corresponsabilitzar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🟩 TEXT RIGORÓS -->
+        <p style="margin-top:12px;">
+        Aquesta lectura es pot fer combinant tres elements:
+        </p>
+
+        <ul>
+            <li>la situació (bloquejant o facilitadora)</li>
+            <li>la posició dins les 13 etapes</li>
+            <li>el que mostra el mapa de conversa</li>
+        </ul>
+
+        <p>
+        A partir d’aquí, es pot decidir com intervenir de manera ajustada.
+        </p>
+
+        <!-- 🔁 DETECCIÓ PER ETAPES -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-stairs"></i>
+                <span>Detectar el moment de la conversa</span>
+            </div>
+
+            <ul>
+                <li><strong>Etapes 1–3</strong> → hi ha bloqueig o poca claredat → cal entendre</li>
+                <li><strong>Etapes 4–6</strong> → hi ha informació però falta focus → cal aclarir</li>
+                <li><strong>Etapes 7–10</strong> → hi ha opcions → cal concretar</li>
+                <li><strong>Etapes 11–13</strong> → hi ha acció → cal sostenir i revisar</li>
+            </ul>
+        </div>
+
+        <!-- 🔴 EXEMPLES REALS -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Exemples per detectar</span>
+            </div>
+
+            <p><strong>Situació 1</strong><br>
+            “Es defensa, evita o es tanca”</p>
+            <p>→ CNV · Etapes 1–2</p>
+            <p>→ Cal observar i obrir espai de connexió</p>
+
+            <p><strong>Situació 2</strong><br>
+            “Hi ha molta conversa però poca claredat”</p>
+            <p>→ GROW · Etapes 4–5</p>
+            <p>→ Cal ordenar i enfocar</p>
+
+            <p><strong>Situació 3</strong><br>
+            “Hi ha opcions però no es decideix”</p>
+            <p>→ GROW · Etapa 8</p>
+            <p>→ Cal concretar una decisió</p>
+
+            <p><strong>Situació 4</strong><br>
+            “Hi ha compromís però es perd amb el temps”</p>
+            <p>→ Lideratge servei · Etapes 11–12</p>
+            <p>→ Cal fer seguiment i sostenir</p>
+
+        </div>
+
+        <!-- 🧪 CLAU PEDAGÒGICA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Clau per actuar bé</span>
+            </div>
+
+            <p>
+            L’error més habitual no és no saber què fer, sinó actuar des d’un punt que no toca.
+            </p>
+
+            <p><strong>Error habitual</strong><br>
+            Intentar decidir o acordar quan encara hi ha tensió o manca de connexió.</p>
+
+            <p><strong>Ús ajustat</strong><br>
+            Detectar el moment relacional i intervenir des d’allà.</p>
+
+        </div>
+
+        <!-- 🧭 PARA · PARLA · PACTA -->
+        <div class="info-card soft-blue" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Aplicar PARA · PARLA · PACTA</span>
+            </div>
+
+            <p>
+            Aquest procés es pot aplicar en qualsevol moment:
+            </p>
+
+            <ul>
+                <li><strong>PARA</strong> → observa i situa la conversa</li>
+                <li><strong>PARLA</strong> → entén què està passant</li>
+                <li><strong>PACTA</strong> → concreta el següent pas</li>
+            </ul>
+
+            <p>
+            El que canvia és com ho fas segons el moment relacional i l’etapa.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+            <!-- 6 -->
+ <div class="accordion-item">
+    <div class="accordion-header">6. Exemple complet: de bloqueig a corresponsabilitat</div>
+    <div class="accordion-content">
+
+        <!-- 🟦 INTRO -->
+        <p>
+        Aquest exemple mostra com una situació pot evolucionar des d’un moment de bloqueig fins a un espai de corresponsabilitat.
+        </p>
+        <p>
+        Es veu com es construeix el mapa, com es situen les etapes i com canvia la relació.
+        </p>
+
+        <!-- 🟨 SITUACIÓ INICIAL -->
+        <div class="info-card soft-blue" style="margin-top:12px;">
+            <div class="info-title">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Situació inicial</span>
+            </div>
+
+            <p>
+            Un alumne no entrega tasques i evita parlar del tema quan se li comenta.
+            </p>
+        </div>
+
+        <!-- 🔴 FASE 1 — CNV -->
+        <div class="info-card soft-violet" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-heart-crack"></i>
+                <span>Fase 1 — Bloqueig (CNV)</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Evita el tema i es defensa.</p>
+
+            <p><strong>Etapes</strong><br>
+            1–2 → resistència i poca obertura</p>
+
+            <p><strong>Mapa</strong></p>
+            <ul>
+                <li>Situació: no entrega tasques</li>
+                <li>Emoció: incomoditat, evitació</li>
+                <li>Necessitat: seguretat, comprensió</li>
+                <li>Acció: evitar la conversa</li>
+            </ul>
+
+            <p><strong>Què toca fer</strong><br>
+            No pressionar → observar, escoltar i obrir espai</p>
+        </div>
+
+        <!-- 🟠 FASE 2 — GROW -->
+        <div class="info-card soft-orange" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Fase 2 — Procés (GROW)</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Es comença a parlar i apareix informació.</p>
+
+            <p><strong>Etapes</strong><br>
+            4–6 → aclarir realitat i responsabilitat</p>
+
+            <p><strong>Mapa</strong></p>
+            <ul>
+                <li>Situació: dificultat per organitzar-se</li>
+                <li>Emoció: frustració</li>
+                <li>Necessitat: estructura, claredat</li>
+                <li>Acció: provar de dividir tasques</li>
+            </ul>
+
+            <p><strong>Què toca fer</strong><br>
+            Aclarir, ordenar i començar a concretar accions</p>
+        </div>
+
+        <!-- 🟢 FASE 3 — SERVEI -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-handshake"></i>
+                <span>Fase 3 — Corresponsabilitat (Lideratge servei)</span>
+            </div>
+
+            <p><strong>Situació</strong><br>
+            Hi ha compromís i acció compartida.</p>
+
+            <p><strong>Etapes</strong><br>
+            8–13 → decisió, acció i seguiment</p>
+
+            <p><strong>Mapa</strong></p>
+            <ul>
+                <li>Situació: acord de lliuraments parcials</li>
+                <li>Emoció: confiança</li>
+                <li>Necessitat: seguiment i suport</li>
+                <li>Acció: revisió setmanal</li>
+            </ul>
+
+            <p><strong>Què toca fer</strong><br>
+            Sostenir, revisar i consolidar</p>
+        </div>
+
+        <!-- 🧪 CLAU FINAL -->
+        <div class="info-card soft-blue" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-key"></i>
+                <span>Què ens ensenya aquest cas</span>
+            </div>
+
+            <ul>
+                <li>Les situacions poden evolucionar si s’ajusta la conversa</li>
+                <li>No es pot començar directament per l’acció</li>
+                <li>El mapa ajuda a entendre</li>
+                <li>Les etapes ajuden a avançar</li>
+                <li>La relació pot passar de bloqueig a corresponsabilitat</li>
+            </ul>
+
+        </div>
+
+        <!-- 🧭 PARA PARLA PACTA -->
+        <div class="info-card soft-green" style="margin-top:14px;">
+            <div class="info-title">
+                <i class="fa-solid fa-rotate"></i>
+                <span>PARA · PARLA · PACTA en el procés</span>
+            </div>
+
+            <ul>
+                <li><strong>PARA</strong> → no reaccionar davant el bloqueig</li>
+                <li><strong>PARLA</strong> → entendre què està passant</li>
+                <li><strong>PACTA</strong> → concretar accions i fer seguiment</li>
+            </ul>
+
+            <p>
+            Aquest procés es repeteix en diferents moments de l’evolució.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
+
+
     </main>
 
     <div class="modal-overlay" id="modal-container" onclick="closeModal()">
@@ -1731,8 +2645,8 @@
             <div id="item-modal-content">
                 <h3 id="item-modal-title">Afegir element</h3>
                 <div style="margin-top: 16px;">
-                    <label for="item-text" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
-                        Escriu el contingut
+                    <label id="item-label" for="item-text" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                        Què s’ha fet, s’està fent o es podria fer?
                     </label>
                     <textarea id="item-text" rows="5" style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem; resize:vertical;" placeholder=""></textarea>
                 </div>
@@ -1751,7 +2665,7 @@
         </button>
 
         <div id="export-modal-content">
-            <h3>Descarregar acta en PDF</h3>
+            <h3>Exportar PDF</h3>
 
             <div style="margin-top: 16px;">
                 <label for="export-title" style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
@@ -1801,9 +2715,23 @@
 
 
 
-    
     <script>
-        const stages = [
+        const afMapping = {
+            1: ["Antecedents"],
+            2: ["Resposta"],
+            3: ["Resposta", "Variables"],
+            4: ["Resposta"],
+            5: ["Antecedents"],
+            6: ["Variables"],
+            7: ["Resposta"],
+            8: ["Resposta"],
+            9: ["Conseqüents"],
+            10: ["Resposta"],
+            11: ["Variables"],
+            12: ["Conseqüents"],
+            13: ["Conseqüents"]
+            };
+        const stagesOLD = [
             { n: 1, f: "Obrir", m: ["CNV"], e: "Observació", c: ["S"], ic: "fa-shield-halved", color: "red", t: "Resistència/Excuses", p: "🖤 Es defensa davant un feedback · ❤️ Hi ha una obertura mínima per mirar què passa", q: "He observat que [fet concret]... Com ho veus tu?", a: "Fes que se senti escoltat sense ser jutjat.", err: "Jutjar → Activa la resistència", sup: ["T'havies adonat d'això?", "És la primera vegada?"] },
             { n: 2, f: "Connectar", m: ["CNV"], e: "Sentiment", c: ["S", "F"], ic: "fa-face-meh", color: "violet", t: "Distància emocional", p: "🖤 Està tancat/da o incòmode · ❤️ La persona pot expressar com està o connectar amb el que sent", q: "Com estàs amb això que està passant?", a: "Valida la seva emoció abans de seguir.", err: "Ignorar emoció → Bloqueig", sup: ["Què és el que més t'està pesant?", "Necessites un moment?"] },
             { n: 3, f: "Entendre", m: ["CNV"], e: "Necessitat", c: ["F", "E"], ic: "fa-circle-question", color: "orange", t: "Malestar confús", p: "🖤 No sap què necessita realment · ❤️ Ja es pot començar a posar nom al que falta o importa", q: "Què hi ha darrere d'això? Què necessites realment?", a: "Ajuda'l a posar nom al que li manca.", err: "Anar directe a la solució", sup: ["Què és important aquí?", "Quina necessitat no s'està cobrint?"] },
@@ -1818,7 +2746,7 @@
             { n: 12, f: "Desenvolupar", m: ["Servei"], e: "Creixement", c: ["E", "A"], ic: "fa-arrow-up-right-dots", color: "orange", t: "Repetició d'errors", p: "🖤 No n'aprèn de les pífies  · ❤️ La situació es pot aprofitar per créixer i ajustar", q: "Què t'ajudaria a fer-ho mejor la propera vegada?", a: "Transforma l'error en lliçó de futur.", err: "No reflexionar", sup: ["Què has aprendre?", "Com t'ha fet créixer aquest repte?"] },
             { n: 13, f: "Mantenir", m: ["Servei"], e: "Seguiment", c: ["R"], ic: "fa-flag-checkered", color: "green", t: "Dissolució del pla", p: "🖤 L'acció es perd en el temps · ❤️ Es pot donar seguiment i mantenir el que funciona", q: "Quin és el següent pas a partir d'aquí?", a: "Agenda una nova fita de control.", err: "No tancar el compromís", sup: ["Quan ens tornem a veure?", "Com ho celebrarem?"] }
         ];
-        const facilitatingSituations = [
+        const facilitatingSituationsOLD = [
             {
                 n: 1,
                 t: "Disponibilitat inicial",
@@ -1885,6 +2813,129 @@
                 p: "Es pot donar seguiment i mantenir el que funciona."
             }
         ];
+
+const stages = [
+    { n: 1, f: "Obrir", m: ["CNV"], e: "Observació", c: ["S"], ic: "fa-shield-halved", color: "red",
+      t: "Resistència o excuses",
+      p: "🖤 Apareixen respostes justificatives o desviacions del focus · ❤️ Es pot mantenir l’atenció en els fets",
+      q: "He observat que [fet concret]... Com es veu això?",
+      a: "Es genera un espai on els fets es poden posar sobre la taula sense judici.",
+      err: "El judici activa la resistència",
+      sup: ["Hi havia consciència d’això?", "És una cosa puntual o recurrent?"] },
+
+    { n: 2, f: "Connectar", m: ["CNV"], e: "Sentiment", c: ["S", "F"], ic: "fa-face-meh", color: "violet",
+      t: "Distància emocional",
+      p: "🖤 Hi ha poca expressió emocional o desconexió amb el que passa · ❤️ Es poden començar a expressar reaccions o emocions",
+      q: "Com s’està vivint això?",
+      a: "Es dona espai perquè aparegui i es reconegui l’experiència emocional.",
+      err: "Ignorar l’emoció genera bloqueig",
+      sup: ["Què és el que més pesa?", "Caldria un moment abans de continuar?"] },
+
+    { n: 3, f: "Entendre", m: ["CNV"], e: "Necessitat", c: ["F", "E"], ic: "fa-circle-question", color: "orange",
+      t: "Malestar difús",
+      p: "🖤 No es concreta què és rellevant o està en joc · ❤️ Es poden identificar elements importants de la situació",
+      q: "Què hi ha darrere d’això? Què és important aquí?",
+      a: "Es facilita identificar què té valor o impacte en la situació.",
+      err: "Anar directament a la solució",
+      sup: ["Què és important en aquesta situació?", "Què pot estar faltant?"] },
+
+    { n: 4, f: "Enfocar", m: ["GROW"], e: "G - Goal", c: ["A"], ic: "fa-bullseye", color: "blue",
+      t: "Falta de direcció",
+      p: "🖤 Hi ha activitat sense un resultat definit · ❤️ Es pot concretar un resultat a assolir",
+      q: "Què es vol aconseguir exactament?",
+      a: "Es busca definir un resultat clar i verificable.",
+      err: "Objectius poc concrets",
+      sup: ["Com es podrà saber que s’ha assolit?"] },
+
+    { n: 5, f: "Aterrar", m: ["GROW"], e: "R - Reality", c: ["A"], ic: "fa-map-location-dot", color: "grey",
+      t: "Desconnexió de la realitat",
+      p: "🖤 No es diferencia entre fets i interpretacions · ❤️ Es poden descriure elements concrets de la situació",
+      q: "On es troba ara mateix respecte a això?",
+      a: "Es posa el focus en dades i fets observables.",
+      err: "Quedar-se en interpretacions o excuses",
+      sup: ["Què s’ha intentat fins ara?"] },
+
+    { n: 6, f: "Confrontar", m: ["GROW"], e: "Reality profunda", c: ["R", "A"], ic: "fa-handshake-slash", color: "red",
+      t: "Falta de responsabilitat",
+      p: "🖤 Es manté el focus en factors externs · ❤️ Es poden identificar àrees d’influència pròpia",
+      q: "Quina part depèn d’un mateix en això?",
+      a: "Es facilita reconèixer el marge d’acció disponible.",
+      err: "Un to dur activa la defensa",
+      sup: ["Quina part es pot assumir?"] },
+
+    { n: 7, f: "Activar", m: ["GROW"], e: "O - Options", c: ["A", "F"], ic: "fa-lightbulb", color: "orange",
+      t: "Bloqueig d’opcions",
+      p: "🖤 No es generen alternatives d’actuació · ❤️ Es poden explorar diferents vies possibles",
+      q: "Quines opcions es poden explorar?",
+      a: "Es facilita l’exploració de diferents possibilitats.",
+      err: "Donar la solució directament",
+      sup: ["Hi ha alguna altra opció possible?"] },
+
+    { n: 8, f: "Decidir", m: ["CNV", "GROW"], e: "W - Will", c: ["R"], ic: "fa-check-double", color: "violet",
+      t: "Indecisió",
+      p: "🖤 Es mantenen diverses opcions sense concretar cap acció · ❤️ Es pot seleccionar una opció concreta",
+      q: "Quin podria ser el primer pas?",
+      a: "Es concreta una acció inicial assumible.",
+      err: "Quedar-se en generalitats",
+      sup: ["Quan podria passar això?"] },
+
+    { n: 9, f: "Pont", m: ["CNV", "GROW", "Servei"], e: "Viabilitat", c: ["R", "A"], ic: "fa-bridge-circle-check", color: "green",
+      t: "Compromís poc realista",
+      p: "🖤 L’acció definida no és viable en la pràctica · ❤️ Es pot ajustar a condicions reals",
+      q: "Què faria possible tirar això endavant?",
+      a: "Es revisen condicions perquè l’acció sigui viable.",
+      err: "No validar si és viable",
+      sup: ["De l’1 al 10, com de probable és?"] },
+
+    { n: 10, f: "Executar", m: ["Servei"], e: "Autonomia", c: ["A"], ic: "fa-play", color: "blue",
+      t: "Dificultat per iniciar",
+      p: "🖤 No es concreta cap acció en marxa · ❤️ Es pot iniciar una acció definida",
+      q: "Com es podria començar?",
+      a: "Es facilita el pas de la planificació a l’acció.",
+      err: "Excés de control",
+      sup: ["Quina ajuda pot ser útil?"] },
+
+    { n: 11, f: "Sostenir", m: ["Servei"], e: "Recolzament", c: ["S", "A"], ic: "fa-life-ring", color: "red",
+      t: "Falta de suport",
+      p: "🖤 Apareixen obstacles que dificulten la continuïtat · ❤️ Es poden activar recursos o suport",
+      q: "Quin suport pot ajudar en aquest punt?",
+      a: "Es mobilitzen recursos per sostenir l’acció.",
+      err: "Fer-ho en lloc de l’altra persona",
+      sup: ["Quina barrera es podria eliminar?", "Caldrien més recursos?"] },
+
+    { n: 12, f: "Desenvolupar", m: ["Servei"], e: "Creixement", c: ["E", "A"], ic: "fa-arrow-up-right-dots", color: "orange",
+      t: "Repetició d’errors",
+      p: "🖤 Es repeteixen patrons sense ajust · ❤️ Es poden incorporar aprenentatges",
+      q: "Què ajudaria a fer-ho diferent la propera vegada?",
+      a: "Es facilita la incorporació d’aprenentatges.",
+      err: "No parar a reflexionar",
+      sup: ["Què s’ha après?", "Què es faria diferent?"] },
+
+    { n: 13, f: "Mantenir", m: ["Servei"], e: "Seguiment", c: ["R"], ic: "fa-flag-checkered", color: "green",
+      t: "Pèrdua de continuïtat",
+      p: "🖤 No es dona seguiment en el temps · ❤️ Es pot establir continuïtat",
+      q: "Quin podria ser el següent pas?",
+      a: "Es defineixen mecanismes de seguiment.",
+      err: "No tancar el procés",
+      sup: ["Quan es revisarà?", "Com es podrà celebrar el progrés?"] }
+];
+
+const facilitatingSituations = [
+    { n: 1, t: "Obertura inicial", p: "Hi ha disponibilitat per escoltar o revisar una situació." },
+    { n: 2, t: "Expressió emocional", p: "Es fan visibles emocions o reaccions associades al que passa." },
+    { n: 3, t: "Claredat sobre allò important", p: "S’identifiquen elements que tenen impacte o valor en la situació." },
+    { n: 4, t: "Direcció definida", p: "Es concreta un resultat o objectiu a assolir." },
+    { n: 5, t: "Lectura concreta de la realitat", p: "Es diferencien fets de valoracions i es descriu la situació." },
+    { n: 6, t: "Identificació del marge d’acció", p: "Es concreten àrees on es pot intervenir directament." },
+    { n: 7, t: "Generació d’alternatives", p: "Es plantegen diferents opcions d’actuació possibles." },
+    { n: 8, t: "Decisió inicial", p: "Es selecciona una opció concreta entre les disponibles." },
+    { n: 9, t: "Compromís viable", p: "L’acció definida s’ajusta a les condicions reals." },
+    { n: 10, t: "Inici d’acció", p: "Es realitza el primer moviment o pas acordat." },
+    { n: 11, t: "Suport activat", p: "Es mobilitzen recursos o ajudes necessàries." },
+    { n: 12, t: "Aprenentatge incorporat", p: "S’ajusten accions a partir de l’experiència." },
+    { n: 13, t: "Seguiment actiu", p: "Es mantenen accions i es revisa el progrés." }
+];
+
 
 
 
@@ -2136,10 +3187,10 @@
 
                 const templates = {
             blank: {
-                situacions: "Només situacions",
-                emocions: "Només emocions",
-                necessitats: "Només necessitats",
-                accions: "Només accions"
+                situacions: "Afegeix situacions",
+                emocions: "Afegeix emocions",
+                necessitats: "Afegeix necessitats",
+                accions: "Afegeix accions"
             },
             roi: {
                 situacions: "Crea una columna de situacions.",
@@ -2247,7 +3298,7 @@ function loadOrganizerState() {
         updateOrganizerCounts();
         updateBankIndicators();
     } catch (error) {
-        console.warn('No s’ha pogut restaurar l’estat de l’organitzador:', error);
+        console.warn('No s’ha pogut restaurar la conversa del mapa:', error);
     }
 }
 function restoreBoardTag(item) {
@@ -2327,7 +3378,7 @@ function applyTemplate(type, shouldSave = true) {
 
     if (btn && label) {
         if (type === 'blank') {
-            label.textContent = 'Carregar plantilla';
+            label.textContent = 'Aplicar plantilla';
             btn.classList.remove('active');
         } else {
             label.textContent = getTemplateLabel(type);
@@ -2436,8 +3487,8 @@ function setSituationMode(mode) {
 
     if (intro) {
         intro.textContent = mode === 'blocking'
-            ? "Identifica quin tipus de situació tens al davant per decidir des d’on començar."
-            : "Identifica quines situacions poden facilitar l’avanç i ajudar-te a orientar la conversa.";
+            ? "Identifica què està passant exactament (fets, conductes o moments concrets) per decidir des d’on començar. Evita interpretacions."
+            : "Identifica què ja està ajudant (obertura, connexió, claredat o acció) per aprofitar-ho i fer avançar la conversa.";
     }
 
     renderSituations();
@@ -2476,7 +3527,7 @@ function renderSituationPreviewText(text) {
 }
 
 function showView(view) {
-            ['home', 'situacions', 'cnv', 'grow', 'servei', 'frase', 'model', 'organitzador'].forEach(v => {
+            ['home', 'situacions', 'cnv', 'grow', 'servei', 'af', 'frase', 'model', 'organitzador'].forEach(v => {
                 const el = document.getElementById(`view-${v}`);
                 if (el) el.style.display = v === view ? 'block' : 'none';
             });
@@ -2551,7 +3602,7 @@ function renderSituations() {
                             return `<span class="method-badge method-grow">🌱 GROW</span>`;
                         }
                         if (method === 'Servei') {
-                            return `<span class="method-badge method-servei">🤝 Servei</span>`;
+                            return `<span class="method-badge method-servei">🤝 Lideratge servei</span>`;
                         }
                         return '';
                     }).join(' ');
@@ -2633,7 +3684,7 @@ function renderSituations() {
                     return `<span class="method-badge method-grow">🌱 GROW</span>`;
                 }
                 if (method === 'Servei') {
-                    return `<span class="method-badge method-servei">🤝 Servei</span>`;
+                    return `<span class="method-badge method-servei">🤝 Lideratge servei</span>`;
                 }
                 return '';
             }).join('');
@@ -2661,18 +3712,18 @@ function renderSituations() {
                         <div class="info-card soft-green">
                             <div class="info-title">
                                 <i class="fa-solid fa-compass"></i>
-                                <span>Lectura de la fase</span>
+                                <span>Què està passant</span>
                             </div>
                             <div class="meta-list">
                                 <div class="meta-row"><strong>Etapa</strong><span>${s.e}</span></div>
-                                <div class="meta-row"><strong>Acció</strong><span>${s.a}</span></div>
+                                <div class="meta-row"><strong>com Avançar</strong><span>${s.a}</span></div>
                             </div>
                         </div>
 
                         <div class="info-card soft-blue">
                             <div class="info-title">
                                 <i class="fa-solid fa-comments"></i>
-                                <span>Preguntes de suport</span>
+                                <span>Preguntes que ajuden</span>
                             </div>
                             <div class="support-chips">${supportItems}</div>
                         </div>
@@ -2698,10 +3749,28 @@ function renderSituations() {
                                 </div>
                                 <div class="badge-group">${fraseBadges}</div>
                             </div>
+                            <div style="margin-top:12px;">
+                                <div style="font-weight:600; margin-bottom:6px;">Anàlisi funcional</div>
+                                ${(() => {
+                                    const af = afMapping[s.n] || [];
+                                    return `
+                                        <div style="margin-top:12px;">
+                                            <div style="font-size:0.72rem; font-weight:700; margin-bottom:6px; color:var(--cep-black);">
+                                                Anàlisi funcional
+                                            </div>
+                                            <div class="badge-group">
+                                                ${af.map(tag => `
+                                                    <span class="mini-badge badge-frase">${tag}</span>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    `;
+                                })()}
+                            </div>
                         </div>
 
                         <div class="error-box">
-                            <strong><i class="fa-solid fa-triangle-exclamation"></i> Error a evitar:</strong>
+                            <strong><i class="fa-solid fa-triangle-exclamation"></i> Cal evitar:</strong>
                             ${s.err}
                         </div>
                     </div>
@@ -2808,7 +3877,7 @@ function renderOrganizerBanks() {
                         <i class="fa-solid fa-camera"></i> ${escapeHtml(item)}
                     </div>
                 `).join('')
-                : `<div class="bank-empty">Encara no hi ha situacions.</div>`;
+                : `<div class="bank-empty">Encara no hi ha situacions definides.</div>`;
 
             bindOrganizerDragEvents(container);
             updateBankIndicators();
@@ -2952,7 +4021,7 @@ function renderOrganizerBanks() {
                         🌼 ${escapeHtml(item)}
                     </div>
                 `).join('')
-                : `<div class="bank-empty">Encara no hi ha accions.</div>`;
+                : `<div class="bank-empty">Encara no hi ha accions definides.</div>`;
 
             bindOrganizerDragEvents(container);
             updateBankIndicators();
@@ -2996,13 +4065,16 @@ function renderOrganizerBanks() {
 
             const title = document.getElementById('item-modal-title');
             const textarea = document.getElementById('item-text');
+            const label = document.getElementById('item-label');
 
             if (type === 'situacio') {
                 title.textContent = 'Afegir situació';
-                textarea.placeholder = 'Escriu la situació, esdeveniment o què passa...';
+                textarea.placeholder = 'Descriu què ha passat o està passant';
+                label.textContent = 'Què ha passat exactament? (fets o conductes observables, sense judicis)';
             } else {
                 title.textContent = 'Afegir acció';
-                textarea.placeholder = 'Escriu una acció possible per satisfer les necessitats...';
+                textarea.placeholder = 'Descriu una acció concreta';
+                label.textContent = 'Quina acció s’ha fet, s’està fent o es podria fer?';
             }
 
             textarea.value = '';
@@ -3427,21 +4499,21 @@ function drawCoverPage(doc, {
         {
             color: THEME.brandRed,
             title: 'PARA',
-            subtitle: 'ATURAR L’IMPULS',
+            subtitle: 'ATURA L’IMPULS',
             body: 'Intervenir en calent ens porta a la reacció impulsiva. Parar és regular-nos per poder actuar millor.',
             quote: '“Ara mateix parem aquí... ho reprenem en un moment?”'
         },
         {
             color: THEME.brandViolet,
             title: 'PARLA',
-            subtitle: 'DONAR VEU REAL',
+            subtitle: 'DONA VEU REAL',
             body: 'No és només deixar parlar, és escoltar de veritat. Passar de jutjar a entendre.',
             quote: 'Què ha passat segons tu? Com t’ha afectat? Què necessites ara?'
         },
         {
             color: THEME.brandBlue,
             title: 'PACTA',
-            subtitle: 'RESPONSABILITAT I COMPROMÍS',
+            subtitle: 'CONSTRUEIX COMPROMÍS',
             body: 'No busquem el càstig, busquem la reparació construïda. Responsabilitat no és culpa: és capacitat d’actuar.',
             quote: 'Què pots fer per reparar el dany? Què necessites per ser reparat?'
         }
@@ -3973,21 +5045,21 @@ function drawCoverPage(doc, {
         {
             color: THEME.brandRed,
             title: 'PARA',
-            subtitle: 'ATURAR L’IMPULS',
+            subtitle: 'ATURA L’IMPULS',
             body: 'Intervenir en calent ens porta a la reacció impulsiva. Parar és regular-nos per poder actuar millor.',
             quote: '“Ara mateix parem aquí... ho reprenem en un moment?”'
         },
         {
             color: THEME.brandViolet,
             title: 'PARLA',
-            subtitle: 'DONAR VEU REAL',
+            subtitle: 'DONA VEU REAL',
             body: 'No és només deixar parlar, és escoltar de veritat. Passar de jutjar a entendre.',
             quote: 'Què ha passat segons tu? Com t’ha afectat? Què necessites ara?'
         },
         {
             color: THEME.brandBlue,
             title: 'PACTA',
-            subtitle: 'RESPONSABILITAT I COMPROMÍS',
+            subtitle: 'CONSTRUEIX COMPROMÍS',
             body: 'No busquem el càstig, busquem la reparació construïda. Responsabilitat no és culpa: és capacitat d’actuar.',
             quote: 'Què pots fer per reparar el dany? Què necessites per ser reparat?'
         }
@@ -4431,6 +5503,15 @@ function addWrappedLabelValue(doc, x, y, label, value, maxWidth) {
         alert('No s’ha pogut generar el PDF.');
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const item = header.parentElement;
+            item.classList.toggle("active");
+        });
+    });
+});
 
 
 
