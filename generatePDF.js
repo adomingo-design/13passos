@@ -1,321 +1,7 @@
 
-function buildExecutiveSummaryData({
-    situationTexts,
-    emotionTexts,
-    needTexts,
-    actionTexts,
-    customSituationTexts,
-    customActionTexts,
-    notes,
-    context
-}) {
-    const totalSituations = situationTexts.length;
-    const totalEmotions = emotionTexts.length;
-    const totalNeeds = needTexts.length;
-    const totalActions = actionTexts.length;
-
-    const totalCustomSituations = customSituationTexts.length;
-    const totalCustomActions = customActionTexts.length;
-    const totalCustom = totalCustomSituations + totalCustomActions;
-
-    const totalMapItems =
-        totalSituations + totalEmotions + totalNeeds + totalActions;
-
-    const hasNotes = Boolean(notes && notes.trim());
-
-    return {
-        totalSituations,
-        totalEmotions,
-        totalNeeds,
-        totalActions,
-        totalCustomSituations,
-        totalCustomActions,
-        totalCustom,
-        totalMapItems,
-        hasNotes,
-        context: context || 'Plantilla utilitzada: En blanc',
-
-        distributionRows: [
-    ['Situacions', String(totalSituations)],
-    ['Emocions', String(totalEmotions)],
-    ['Necessitats', String(totalNeeds)],
-    ['Accions', String(totalActions)]
-],
-
-recordRows: [
-    ['Plantilla', context || 'En blanc'],
-    /*['Situacions registrades', totalSituations > 0 ? 'Sí' : 'No'],
-    ['Emocions registrades', totalEmotions > 0 ? 'Sí' : 'No'],
-    ['Necessitats registrades', totalNeeds > 0 ? 'Sí' : 'No'],
-    ['Accions registrades', totalActions > 0 ? 'Sí' : 'No'],*/
-    ['Observacions complementàries', hasNotes ? 'Sí' : 'No']
-],
-
-customRows: [
-    ['Situacions noves incorporades', String(totalCustomSituations)],
-    ['Accions noves incorporades', String(totalCustomActions)],
-    ['Total d’elements personalitzats', String(totalCustom)]
-],
-
-useLines: [
-    'Es pot ampliar el registre de situacions.',
-    'Es pot incorporar més detall en necessitats o accions.',
-    'Es pot desenvolupar el contingut del mapa en sessions posteriors.'
-]
-    };
-}
-
-function drawExecutiveSummaryPage_OLD(doc, {
-    logoDataUrl,
-    generatedAt,
-    title,
-    subtitle,
-    people,
-    notes,
-    summary,
-    pageNumber,
-    THEME
-}) {
-    const w = doc.internal.pageSize.getWidth();
-    const h = doc.internal.pageSize.getHeight();
-    const m = 14;
-    const usableW = w - (m * 2);
-
-    const headerBottom = drawPageHeader(doc, {
-        logoDataUrl,
-        title: 'Resum executiu',
-        subtitle: title,
-        pageWidth: w,
-        margin: m
-    });
-
-    let y = headerBottom + 10;
-
-    setFont(doc, 'bold', 15, THEME.ink);
-    doc.text('Lectura general de la sessió', m, y);
-    y += 7;
-
-    setFont(doc, 'normal', 10.5, THEME.text);
-    const introLines = doc.splitTextToSize(
-        summary.summaryLead + ' ' + summary.reading,
-        usableW
-    );
-    doc.text(introLines, m, y);
-    y += (introLines.length * 5.2) + 6;
-
-    // Caja de síntesis
-    drawSectionCard(doc, {
-        x: m,
-        y,
-        w: usableW,
-        h: 34,
-        title: 'Síntesi executiva',
-        fillColor: THEME.softBg,
-        accentColor: THEME.brandBlue
-    });
-
-    setFont(doc, 'normal', 9.5, THEME.text);
-    doc.text(`Zona relacional principal: ${summary.relationalZone}`, m + 7, y + 15);
-    doc.text(`Moment de treball: ${summary.stageZone}`, m + 7, y + 21);
-    doc.text(`Persones participants: ${people || 'No indicades'}`, m + 7, y + 27);
-    y += 42;
-
-    // Indicadores
-    const statW = (usableW - 9) / 4;
-    const statData = [
-        ['Situacions', summary.totalSituations, THEME.brandRed],
-        ['Emocions', summary.totalEmotions, THEME.brandViolet],
-        ['Necessitats', summary.totalNeeds, THEME.brandBlue],
-        ['Accions', summary.totalActions, THEME.brandOrange]
-    ];
-
-    statData.forEach((item, index) => {
-        const x = m + (index * (statW + 3));
-        drawRoundedCard(doc, x, y, statW, 22, THEME.white, THEME.line, 3);
-        doc.setFillColor(...item[2]);
-        doc.roundedRect(x, y, statW, 4, 3, 3, 'F');
-
-        setFont(doc, 'bold', 12, THEME.ink);
-        doc.text(String(item[1]), x + 6, y + 12);
-
-        setFont(doc, 'normal', 8.5, THEME.muted);
-        doc.text(item[0], x + 6, y + 18);
-    });
-
-    y += 30;
-
-    // Fortalezas
-    const strengthsH = Math.max(34, estimateListHeight(doc, summary.strengths, usableW - 12, 8) + 14);
-    drawSectionCard(doc, {
-        x: m,
-        y,
-        w: usableW,
-        h: strengthsH,
-        title: 'Elements que ja sostenen l’avanç',
-        fillColor: THEME.needBg,
-        accentColor: THEME.brandGreen
-    });
-    drawListInCard(doc, m + 7, y + 15, summary.strengths, usableW - 12, 8);
-    y += strengthsH + 8;
-
-    // Alertas / foco
-    const cautionsH = Math.max(34, estimateListHeight(doc, summary.cautions, usableW - 12, 8) + 14);
-    drawSectionCard(doc, {
-        x: m,
-        y,
-        w: usableW,
-        h: cautionsH,
-        title: 'Aspectes a prioritzar',
-        fillColor: THEME.situationBg,
-        accentColor: THEME.brandRed
-    });
-    drawListInCard(doc, m + 7, y + 15, summary.cautions, usableW - 12, 8);
-    y += cautionsH + 8;
-
-    // Observaciones
-    if (notes) {
-        const notesLines = doc.splitTextToSize(notes, usableW - 12).slice(0, 5);
-        const notesH = Math.max(28, (notesLines.length * 5) + 16);
-
-        drawSectionCard(doc, {
-            x: m,
-            y,
-            w: usableW,
-            h: notesH,
-            title: 'Observacions de context',
-            fillColor: THEME.white,
-            accentColor: THEME.brandViolet
-        });
-
-        setFont(doc, 'normal', 9.2, THEME.text);
-        doc.text(notesLines, m + 7, y + 15);
-    }
-
-    drawPageFooter(doc, {
-        generatedAt,
-        pageNumber,
-        pageWidth: w,
-        pageHeight: h,
-        margin: m
-    });
-}
 
 
-function drawExecutiveSummaryPage(doc, {
-    logoDataUrl,
-    generatedAt,
-    title,
-    subtitle,
-    people,
-    notes,
-    summary,
-    pageNumber,
-    THEME
-}) {
-    const w = doc.internal.pageSize.getWidth();
-    const h = doc.internal.pageSize.getHeight();
-    const m = 16;
-    const usableW = w - (m * 2);
 
-    let y = drawMonoHeader(doc, {
-        title: 'Resum',
-        subtitle: title || '',
-        pageWidth: w,
-        margin: m
-    });
-
-    // 1. Datos generales
-    drawMonoSectionTitle(doc, '1. Dades generals', m, y, usableW);
-    y += 8;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9.2);
-    doc.setTextColor(40, 40, 40);
-    doc.text(`Data de generació: ${generatedAt}`, m, y);
-    y += 5.5;
-    doc.text(`Persones participants: ${people || 'No consignades'}`, m, y);
-    y += 10;
-
-    // 2. Resumen cuantitativo
-    drawMonoSectionTitle(doc, '2. Resum quantitatiu', m, y, usableW);
-    y += 8;
-
-    y = drawMonoTable(doc, {
-        x: m,
-        y,
-        w: usableW,
-        header: ['Categoría', 'Total'],
-        rows: summary.distributionRows,
-        colRatios: [0.72, 0.28],
-        rowH: 8
-    });
-
-    y += 8;
-
-    // 3. Registro complementario
-    drawMonoSectionTitle(doc, '3. Altres dades', m, y, usableW);
-    y += 8;
-
-    y = drawMonoTable(doc, {
-        x: m,
-        y,
-        w: usableW,
-        rows: summary.recordRows,
-        colRatios: [0.72, 0.28],
-        rowH: 8
-    });
-
-    y += 8;
-
-    y = drawMonoTable(doc, {
-        x: m,
-        y,
-        w: usableW,
-        rows: summary.customRows,
-        colRatios: [0.72, 0.28],
-        rowH: 8
-    });
-
-    y += 8;
-
-    // 4. Posibilidades de uso
-    /*drawMonoSectionTitle(doc, '4. Posibilidades de uso', m, y, usableW);*/
-    /*y += 8;
-
-    y = drawMonoLines(doc, {
-        x: m,
-        y,
-        w: usableW,
-        lines: summary.useLines.map(line => `- ${line}`),
-        lineHeight: 4.8
-    });*/
-
-    // 5. Observaciones consignadas
-    if (notes && notes.trim()) {
-        y += 6;
-        drawMonoSectionTitle(doc, '4. Observacions consignades', m, y, usableW);
-        y += 8;
-
-        doc.setDrawColor(170, 170, 170);
-        doc.setLineWidth(0.2);
-        doc.rect(m, y - 3, usableW, 28);
-
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(40, 40, 40);
-
-        const noteLines = doc.splitTextToSize(notes, usableW - 6).slice(0, 6);
-        doc.text(noteLines, m + 3, y + 2);
-    }
-
-    drawPageFooter(doc, {
-        generatedAt,
-        pageNumber,
-        pageWidth: w,
-        pageHeight: h,
-        margin: m
-    });
-}
 
 function drawPdfLogo(doc, logoDataUrl, x, y, targetW = 30) {
     if (!logoDataUrl) {
@@ -692,17 +378,6 @@ async function exportOrganizerPdf() {
             ? getTemplateLabel(currentTemplate)
             : 'En blanc';
 
-    const executiveSummary = buildExecutiveSummaryData({
-        situationTexts,
-        emotionTexts,
-        needTexts,
-        actionTexts,
-        customSituationTexts,
-        customActionTexts,
-        notes,
-        context: templateName
-    });
-
     const templateGuidance = {
         situations: templates?.[currentTemplate]?.situacions || '',
         emotions: templates?.[currentTemplate]?.emocions || '',
@@ -813,33 +488,18 @@ async function exportOrganizerPdf() {
         }
 
         /* =========================
-           PÀGINA 3: RESUM EXECUTIU
-           ========================= */
-        pdf.addPage('a4', 'portrait');
-        pageNumber += 1;
-
-        drawExecutiveSummaryPage(pdf, {
-            logoDataUrl,
-            generatedAt,
-            title,
-            subtitle,
-            people,
-            notes,
-            summary: executiveSummary,
-            pageNumber,
-            THEME
-        });
-
-        /* =========================
-           PÀGINA 4+: DESENVOLUPAMENT DEL REGISTRE
+           PÀGINA 3+: DESENVOLUPAMENT DEL REGISTRE
            ========================= */
         pdf.addPage('a4', 'portrait');
         pageNumber += 1;
 
         pageNumber = drawRegistryContinuationPage(pdf, {
+            logoDataUrl,
             generatedAt,
             title,
-            summary: executiveSummary,
+            subtitle,
+            templateName,
+            notes,
             templateGuidance,
             customSituationTexts,
             customActionTexts,
@@ -866,7 +526,6 @@ async function exportOrganizerPdf() {
         alert('No s’ha pogut generar el PDF.');
     }
 }
-
 
     function setFont(doc, style = 'normal', size = 10, color = THEME.ink) {
         doc.setFont('helvetica', style);
@@ -1085,204 +744,75 @@ function drawCoverPage(doc, {
 }) {
     const w = doc.internal.pageSize.getWidth();
     const h = doc.internal.pageSize.getHeight();
-    const m = 8;
+    const m = 16;
+    const usableW = w - (m * 2);
 
-    doc.setFillColor(...THEME.softBg);
+    doc.setFillColor(255, 255, 255);
     doc.rect(0, 0, w, h, 'F');
 
-    // Filete superior de 5 colors
-    const stripeMargin = 8;
-    const stripeY = 8;
-    const stripeH = 1.2;
-    const stripeW = (w - (stripeMargin * 2)) / 5;
+    let y = 22;
 
-    doc.setFillColor(...THEME.brandRed);
-    doc.rect(stripeMargin, stripeY, stripeW, stripeH, 'F');
-
-    doc.setFillColor(...THEME.brandOrange);
-    doc.rect(stripeMargin + stripeW, stripeY, stripeW, stripeH, 'F');
-
-    doc.setFillColor(...THEME.brandViolet);
-    doc.rect(stripeMargin + (stripeW * 2), stripeY, stripeW, stripeH, 'F');
-
-    doc.setFillColor(...THEME.brandGreen);
-    doc.rect(stripeMargin + (stripeW * 3), stripeY, stripeW, stripeH, 'F');
-
-    doc.setFillColor(...THEME.brandBlue);
-    doc.rect(stripeMargin + (stripeW * 4), stripeY, stripeW, stripeH, 'F');
-
-    // Logo fora del bloc agrupat
     if (logoDataUrl) {
-        const logoBoxW = 52;
-        const logoBoxH = 18;
-        const logoBoxX = w - m - logoBoxW;
-        const logoBoxY = 16;
-
-        drawRoundedCard(doc, logoBoxX, logoBoxY, logoBoxW, logoBoxH, THEME.white, THEME.line, 4);
-        drawPdfLogo(doc, logoDataUrl, logoBoxX + 4, logoBoxY + 3, 44);
+        const logoW = 42;
+        const logoH = 14;
+        const logoX = w - m - logoW;
+        doc.addImage(logoDataUrl, 'PNG', logoX, y - 8, logoW, logoH);
     }
 
-    // BLOQUE SUPERIOR AGRUPADO
-    const heroX = m;
-    const heroY = 40;
-    const heroW = w - (m * 2);
-    const innerX = heroX + 6;
-    const innerW = heroW - 12;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(20, 20, 20);
+    doc.text(title, m, y + 8);
 
-    const subtitleLines = subtitle ? doc.splitTextToSize(subtitle, innerW) : [];
-    const subtitleHeight = subtitleLines.length ? subtitleLines.length * 5 + 3 : 0;
+    y += 16;
 
-    // Observaciones dinámicas
-    const notesTitleH = notes ? 6 : 0;
-    const notesLines = notes ? doc.splitTextToSize(notes, innerW) : [];
-    const maxNotesLines = 8;
-    const visibleNotesLines = notesLines.slice(0, maxNotesLines);
-    const notesTextH = visibleNotesLines.length ? visibleNotesLines.length * 4.2 : 0;
-    const notesBlockH = notes ? 8 + notesTitleH + notesTextH + 4 : 0;
-
-    const heroTopPad = 18;
-    const titleBlockH = 9;
-    const separator1H = 8;
-    const fitxaTitleH = 8;
-    const fitxaBodyH = 14;
-    const separator2H = notes ? 7 : 0;
-    const heroBottomPad = 8;
-
-    const heroH =
-        heroTopPad +
-        titleBlockH +
-        subtitleHeight +
-        separator1H +
-        fitxaTitleH +
-        fitxaBodyH +
-        separator2H +
-        notesBlockH +
-        heroBottomPad;
-
-    drawRoundedCard(doc, heroX, heroY, heroW, heroH, THEME.white, THEME.line, 6);
-
-    let y = heroY + 18;
-
-    // Títol
-    setFont(doc, 'bold', 22, THEME.ink);
-    doc.text(title, innerX, y);
-    y += 9;
-
-    // Subtítol
-    if (subtitleLines.length) {
-        setFont(doc, 'normal', 11, THEME.muted);
-        doc.text(subtitleLines, innerX, y);
-        y += subtitleLines.length * 5 + 3;
+    if (subtitle) {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.setTextColor(90, 90, 90);
+        const subtitleLines = doc.splitTextToSize(subtitle, usableW);
+        doc.text(subtitleLines, m, y);
+        y += subtitleLines.length * 5 + 6;
     }
 
-    // Separador
-    doc.setDrawColor(...THEME.line);
-    doc.line(innerX, y, heroX + heroW - 6, y);
+    doc.setDrawColor(170, 170, 170);
+    doc.setLineWidth(0.4);
+    doc.line(m, y, w - m, y);
+    y += 12;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(20, 20, 20);
+    doc.text('DADES GENERALS', m, y);
+
     y += 8;
 
-    // Fitxa
-    setFont(doc, 'bold', 10, THEME.ink);
-    doc.text('Fitxa de l’informe', innerX, y);
-    y += 8;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(40, 40, 40);
+    doc.text(`Data de generació: ${generatedAt}`, m, y);
+    y += 6;
+    doc.text(`Persones / equips: ${people || 'No consignades'}`, m, y);
+    y += 10;
 
-    setFont(doc, 'normal', 9.5, THEME.text);
-    doc.text(`Data de generació: ${generatedAt}`, innerX, y);
-    y += 7;
-    doc.text(`Persones / equips: ${people || '—'}`, innerX, y);
-    y += 9;
+    if (notes && notes.trim()) {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(20, 20, 20);
+        doc.text('OBSERVACIONS', m, y);
+        y += 8;
 
-    // Observacions
-    if (notes) {
-        doc.setDrawColor(...THEME.line);
-        doc.line(innerX, y - 2, heroX + heroW - 6, y - 2);
+        doc.setDrawColor(170, 170, 170);
+        doc.setLineWidth(0.2);
+        doc.rect(m, y - 4, usableW, 40);
 
-        setFont(doc, 'bold', 9, THEME.ink);
-        doc.text('Observacions', innerX, y + 3);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(40, 40, 40);
 
-        setFont(doc, 'normal', 8.5, THEME.text);
-        doc.text(visibleNotesLines, innerX, y + 9);
-
-        if (notesLines.length > maxNotesLines) {
-            const moreY = y + 9 + (visibleNotesLines.length * 4.2) + 1;
-            setFont(doc, 'normal', 8, THEME.muted);
-            doc.text(`+ ${notesLines.length - maxNotesLines} línies més`, innerX, moreY);
-        }
+        const noteLines = doc.splitTextToSize(notes, usableW - 6).slice(0, 8);
+        doc.text(noteLines, m + 3, y + 1);
     }
-
-    // TARJETAS VERTICALES AUTOAJUSTADAS
-    const cardX = m;
-    const cardW = w - (m * 2);
-    const cardGap = 4;
-    const cardY = heroY + heroH + 8;
-
-    // Reservamos espacio para footer
-    const footerSafeTop = h - 18;
-    const availableForCards = footerSafeTop - cardY;
-
-    // Altura automática de las 3 tarjetas
-    let cardH = (availableForCards - (cardGap * 2)) / 3;
-
-    // límites razonables
-    cardH = Math.max(32, Math.min(42, cardH));
-
-    const panels = [
-        {
-            color: THEME.brandRed,
-            title: 'PARA',
-            subtitle: 'ATURA L’IMPULS',
-            body: 'Intervenir en calent ens porta a la reacció impulsiva. Parar és regular-nos per poder actuar millor.',
-            quote: '“Ara mateix parem aquí... ho reprenem en un moment?”'
-        },
-        {
-            color: THEME.brandViolet,
-            title: 'PARLA',
-            subtitle: 'DONA VEU REAL',
-            body: 'No és només deixar parlar, és escoltar de veritat. Passar de jutjar a entendre.',
-            quote: 'Què ha passat segons tu? Com t’ha afectat? Què necessites ara?'
-        },
-        {
-            color: THEME.brandBlue,
-            title: 'PACTA',
-            subtitle: 'CONSTRUEIX COMPROMÍS',
-            body: 'No busquem el càstig, busquem la reparació construïda. Responsabilitat no és culpa: és capacitat d’actuar.',
-            quote: 'Què pots fer per reparar el dany? Què necessites per ser reparat?'
-        }
-    ];
-
-    let currentCardY = cardY;
-
-    panels.forEach(panel => {
-        doc.setFillColor(...panel.color);
-        doc.roundedRect(cardX, currentCardY, cardW, cardH, 8, 8, 'F');
-
-        setFont(doc, 'bold', 18, THEME.white);
-        doc.text(panel.title, cardX + 8, currentCardY + 10);
-
-        setFont(doc, 'bold', 9.2, THEME.white);
-        doc.text(panel.subtitle, cardX + 8, currentCardY + 18);
-
-        const quoteBoxW = 64;
-        const quoteBoxH = Math.min(18, cardH - 10);
-        const quoteBoxX = cardX + cardW - quoteBoxW - 8;
-        const quoteBoxY = currentCardY + Math.max(6, (cardH - quoteBoxH) / 2);
-
-        const bodyW = cardW - 92;
-        const bodyMaxLines = cardH < 36 ? 2 : 3;
-
-        setFont(doc, 'normal', 9, THEME.white);
-        const bodyLines = doc.splitTextToSize(panel.body, bodyW).slice(0, bodyMaxLines);
-        doc.text(bodyLines, cardX + 8, currentCardY + 26);
-
-        doc.setFillColor(30, 30, 32);
-        doc.roundedRect(quoteBoxX, quoteBoxY, quoteBoxW, quoteBoxH, 4, 4, 'F');
-
-        setFont(doc, 'bold', 7.2, THEME.white);
-        const quoteMaxLines = cardH < 36 ? 2 : 3;
-        const quoteLines = doc.splitTextToSize(panel.quote, quoteBoxW - 8).slice(0, quoteMaxLines);
-        doc.text(quoteLines, quoteBoxX + 4, quoteBoxY + 5);
-
-        currentCardY += cardH + cardGap;
-    });
 
     drawPageFooter(doc, {
         generatedAt,
@@ -1292,7 +822,6 @@ function drawCoverPage(doc, {
         margin: m
     });
 }
-
 function addWrappedLabelValue(doc, x, y, label, value, maxWidth) {
         const text = `${label}${value || '—'}`;
         return drawCardText(doc, x, y, text, maxWidth, 4.8, 'normal', 9.3, THEME.text);
@@ -1461,9 +990,12 @@ function drawMonoLines(doc, {
 }
 
 function drawRegistryContinuationPage(doc, {
+    logoDataUrl,
     generatedAt,
     title,
-    summary,
+    subtitle,
+    templateName,
+    notes,
     templateGuidance,
     customSituationTexts,
     customActionTexts,
@@ -1478,20 +1010,68 @@ function drawRegistryContinuationPage(doc, {
     const m = 16;
     const usableW = w - (m * 2);
 
-    let y = drawMonoHeader(doc, {
-        title: 'Desarrollo del registro',
-        subtitle: title || '',
-        pageWidth: w,
-        margin: m
-    });
+    const startNewRegistryPage = () => {
+        const y0 = drawMonoHeader(doc, {
+            title: 'Desenvolupament del registre',
+            subtitle: title || '',
+            pageWidth: w,
+            margin: m
+        });
 
-    const drawBlock = (sectionTitle, groups) => {
+        if (logoDataUrl) {
+            const logoW = 28;
+            const logoH = 9;
+            doc.addImage(logoDataUrl, 'PNG', w - m - logoW, 10, logoW, logoH);
+        }
+
+        return y0;
+    };
+
+    let y = startNewRegistryPage();
+
+    const ensureSpace = (needed = 20) => {
+        if (y + needed > h - 18) {
+            doc.addPage('a4', 'portrait');
+            pageNumber += 1;
+            y = startNewRegistryPage();
+        }
+    };
+
+    const drawTextBox = (label, value, minHeight = 12) => {
+        ensureSpace(minHeight + 12);
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9.5);
+        doc.setTextColor(20, 20, 20);
+        doc.text(label, m, y);
+
+        y += 5;
+
+        const lines = doc.splitTextToSize(value || 'No consignades', usableW - 6);
+        const boxH = Math.max(minHeight, (lines.length * 4.5) + 6);
+
+        ensureSpace(boxH + 4);
+
+        doc.setDrawColor(170, 170, 170);
+        doc.setLineWidth(0.2);
+        doc.rect(m, y - 3, usableW, boxH);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(40, 40, 40);
+        doc.text(lines, m + 3, y + 1);
+
+        y += boxH + 6;
+    };
+
+    const drawItemBlock = (sectionTitle, groups) => {
+        ensureSpace(20);
+
         drawMonoSectionTitle(doc, sectionTitle, m, y, usableW);
         y += 8;
 
         groups.forEach(group => {
-            const hasItems = Array.isArray(group.items) && group.items.length > 0;
-            const guidance = group.guidance || '';
+            ensureSpace(18);
 
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(9.2);
@@ -1499,52 +1079,53 @@ function drawRegistryContinuationPage(doc, {
             doc.text(group.label, m, y);
             y += 5;
 
-            if (guidance) {
+            if (group.guidance) {
+                const guidanceLines = doc.splitTextToSize(
+                    `Orientacions: ${group.guidance}`,
+                    usableW
+                );
+
                 doc.setFont('helvetica', 'normal');
-                doc.setFontSize(8.6);
+                doc.setFontSize(8.5);
                 doc.setTextColor(95, 95, 95);
-                const guidanceLines = doc.splitTextToSize(`Orientación de plantilla: ${guidance}`, usableW - 2);
                 doc.text(guidanceLines, m, y);
-                y += guidanceLines.length * 4.3;
+                y += guidanceLines.length * 4.2 + 3;
             }
 
-            doc.setDrawColor(170, 170, 170);
-            doc.setLineWidth(0.2);
+            const items = Array.isArray(group.items) && group.items.length
+                ? group.items
+                : ['No consta registre.'];
 
-            const rows = hasItems
-                ? group.items.map(item => [item])
-                : [['No consta registro.']];
+            items.forEach(item => {
+                const itemLines = doc.splitTextToSize(item, usableW - 8);
+                const rowH = Math.max(8, (itemLines.length * 4.3) + 3);
 
-            rows.forEach(([item]) => {
-                const textLines = doc.splitTextToSize(item, usableW - 8);
-                const rowH = Math.max(8, (textLines.length * 4.3) + 3);
+                ensureSpace(rowH + 4);
 
-                if (y + rowH > h - 18) {
-                    doc.addPage('a4', 'portrait');
-                    pageNumber += 1;
-                    y = drawMonoHeader(doc, {
-                        title: 'Desenvolupament del registre',
-                        subtitle: title || '',
-                        pageWidth: w,
-                        margin: m
-                    });
-                }
+                doc.setDrawColor(170, 170, 170);
+                doc.setLineWidth(0.2);
+                doc.rect(m, y - 3, usableW, rowH);
 
-                doc.rect(m, y - 3.5, usableW, rowH);
                 doc.setFont('helvetica', 'normal');
                 doc.setFontSize(9);
                 doc.setTextColor(40, 40, 40);
-                doc.text(textLines, m + 3, y + 1.5);
+                doc.text(itemLines, m + 3, y + 1);
+
                 y += rowH + 2;
             });
 
-            y += 4;
+            y += 5;
         });
     };
 
-    drawBlock('1. Situacions', [
+    // Bloc inicial
+    drawTextBox('Plantilla', templateName || 'En blanc', 10);
+    drawTextBox('Observacions', (notes && notes.trim()) ? notes : 'No consignades', 20);
+
+    // Situacions
+    drawItemBlock('1. Situacions', [
         {
-            label: 'Situacions donades d’alta en el banc',
+            label: 'Situacions donades d’alta al banc',
             items: customSituationTexts,
             guidance: templateGuidance.situations
         },
@@ -1555,18 +1136,8 @@ function drawRegistryContinuationPage(doc, {
         }
     ]);
 
-    if (y > h - 70) {
-        doc.addPage('a4', 'portrait');
-        pageNumber += 1;
-        y = drawMonoHeader(doc, {
-            title: 'Desenvolupament del registre',
-            subtitle: title || '',
-            pageWidth: w,
-            margin: m
-        });
-    }
-
-    drawBlock('2. Emocions', [
+    // Emocions
+    drawItemBlock('2. Emocions', [
         {
             label: 'Emocions registrades',
             items: emotionTexts,
@@ -1574,18 +1145,8 @@ function drawRegistryContinuationPage(doc, {
         }
     ]);
 
-    if (y > h - 70) {
-        doc.addPage('a4', 'portrait');
-        pageNumber += 1;
-        y = drawMonoHeader(doc, {
-            title: 'Desenvolupament del registre',
-            subtitle: title || '',
-            pageWidth: w,
-            margin: m
-        });
-    }
-
-    drawBlock('3. Necessitats', [
+    // Necessitats
+    drawItemBlock('3. Necessitats', [
         {
             label: 'Necessitats registrades',
             items: needTexts,
@@ -1593,20 +1154,10 @@ function drawRegistryContinuationPage(doc, {
         }
     ]);
 
-    if (y > h - 70) {
-        doc.addPage('a4', 'portrait');
-        pageNumber += 1;
-        y = drawMonoHeader(doc, {
-            title: 'Desenvolupament del registre',
-            subtitle: title || '',
-            pageWidth: w,
-            margin: m
-        });
-    }
-
-    drawBlock('4. Acciones', [
+    // Accions
+    drawItemBlock('4. Accions', [
         {
-            label: 'Accions donades d’alta en el banc',
+            label: 'Accions donades d’alta al banc',
             items: customActionTexts,
             guidance: templateGuidance.actions
         },
