@@ -1702,9 +1702,9 @@
         }
 
         .organizer-template-btn {
-            color: var(--cep-red);
-            border-color: #f5c2c2;
-            background: #fff1f1;
+            background: var(--cep-red);
+            color: white;
+            border-color: var(--cep-red);
         }
 
         .organizer-template-btn:hover {
@@ -1906,7 +1906,7 @@
 
                         <button id="template-button" class="mini-action-btn organizer-template-btn"
                             onclick="openTemplateModal()">
-                            <span id="template-button-label">Plantilla</span>
+                            <span id="template-button-label">Carregar plantilla</span>
                             <i class="fa-solid fa-layer-group template-caret"></i>
                         </button>
 
@@ -4511,7 +4511,7 @@
 
             if (btn && label) {
                 if (type === 'blank') {
-                    label.textContent = 'Plantilla';
+                    label.textContent = 'Carregar plantilla';
                     btn.classList.remove('active');
                 } else {
                     label.textContent = `Plantilla: ${t.name || type}`;
