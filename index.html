@@ -1726,6 +1726,16 @@
         .template-preview-card.reveal .template-preview-text {
             animation: textReveal 0.6s ease;
         }
+
+        /*.organizer-save-btn {
+            background: #eef7f1;
+            border-color: #cde5d6;
+        }
+
+        .organizer-load-btn {
+            background: #eef4fb;
+            border-color: #cdddf5;
+        }*/
     </style>
 </head>
 
@@ -1893,11 +1903,22 @@
                     <h2><i class="fa-solid fa-table-cells-large"></i> Mapa de conversa</h2>
 
                     <div class="organizer-actions">
+
                         <button id="template-button" class="mini-action-btn organizer-template-btn"
                             onclick="openTemplateModal()">
                             <span id="template-button-label">Plantilla</span>
                             <i class="fa-solid fa-layer-group template-caret"></i>
                         </button>
+
+                         <button class="mini-action-btn organizer-load-btn" onclick="triggerLoadConversation()">
+                            <i class="fa-solid fa-folder-open"></i> Carregar conversa
+                        </button>
+
+                        <button class="mini-action-btn organizer-save-btn" onclick="openSaveConversationModal()">
+                            <i class="fa-solid fa-floppy-disk"></i> Desar conversa
+                        </button>
+
+                       
 
                         <button class="mini-action-btn organizer-export-btn" onclick="openExportModal()">
                             <i class="fa-solid fa-file-pdf"></i> Exportar PDF
@@ -1906,6 +1927,17 @@
                         <button class="mini-action-btn organizer-clear-btn" onclick="handleClearOrganizer()">
                             <i class="fa-solid fa-trash"></i> Esborrar mapa
                         </button>
+
+
+
+
+
+
+
+                        <!-- input ocult per carregar fitxers -->
+                        <input type="file" id="conversation-file-input" accept=".json,application/json"
+                            style="display:none" onchange="handleConversationFileSelected(event)">
+
                     </div>
 
 
@@ -3567,6 +3599,36 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="save-conversation-modal-container" onclick="closeSaveConversationModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeSaveConversationModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="save-conversation-modal-content">
+                <h3>Desar conversa</h3>
+
+                <div style="margin-top: 16px;">
+                    <label for="conversation-title"
+                        style="display:block; font-weight:700; margin-bottom:8px; color:var(--cep-black);">
+                        Nom <span class="required">*</span>
+                    </label>
+                    <input id="conversation-title" type="text"
+                        style="width:100%; border:1px solid #ddd; border-radius:12px; padding:12px; font-family:inherit; font-size:0.95rem;"
+                        placeholder="Ex. Mediació grup 2n A · abril 2026">
+                </div>
+
+                <div style="margin-top:16px; display:flex; justify-content:flex-end; gap:10px;">
+                    <button class="mini-action-btn" onclick="closeSaveConversationModal()">Cancel·lar</button>
+                    <button class="mini-action-btn primary-btn" onclick="downloadConversationJson()">Descarregar
+                        JSON</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="modal-overlay" id="export-modal-container" onclick="closeExportModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeExportModal()">
@@ -4298,7 +4360,7 @@
             }
         }
 
-        function loadOrganizerState() {
+        function loadOrganizerState_OLD() {
             try {
                 const raw = localStorage.getItem(ORGANIZER_STORAGE_KEY);
                 if (!raw) return;
@@ -4326,6 +4388,54 @@
                 console.warn('No s’ha pogut restaurar la conversa del mapa:', error);
             }
         }
+
+
+        function restoreOrganizerState(state) {
+            if (!state || typeof state !== 'object') return;
+
+            customSituations = Array.isArray(state.customSituations) ? state.customSituations : [];
+            customActions = Array.isArray(state.customActions) ? state.customActions : [];
+            currentTemplate = state.currentTemplate || 'blank';
+
+            renderSituacionsBank();
+            renderAccionsBank();
+
+            [
+                'situacions-area',
+                'emocions-area-organizer',
+                'necessitats-area',
+                'accions-area'
+            ].forEach(areaId => {
+                const area = document.getElementById(areaId);
+                if (area) area.innerHTML = '';
+            });
+
+            applyTemplate(currentTemplate, false);
+
+            if (Array.isArray(state.boardItems)) {
+                state.boardItems.forEach(item => {
+                    restoreBoardTag(item);
+                });
+            }
+
+            updateOrganizerCounts();
+            updateBankIndicators();
+            saveOrganizerState();
+        }
+
+        function loadOrganizerState() {
+            try {
+                const raw = localStorage.getItem(ORGANIZER_STORAGE_KEY);
+                if (!raw) return;
+
+                const state = JSON.parse(raw);
+                restoreOrganizerState(state);
+            } catch (error) {
+                console.warn('No s’ha pogut restaurar la conversa del mapa:', error);
+            }
+        }
+
+
         function restoreBoardTag(item) {
             const area = document.getElementById(item.areaId);
             if (!area) return;
@@ -5324,6 +5434,7 @@
             // ESC → tanca modal obert
             if (e.key === 'Escape') {
                 if (isModalOpen('template-modal-container')) closeTemplateModal();
+                else if (isModalOpen('save-conversation-modal-container')) closeSaveConversationModal();
                 else if (isModalOpen('export-modal-container')) closeExportModal();
                 else if (isModalOpen('item-modal-container')) closeItemModal();
                 return;
@@ -5343,31 +5454,33 @@
         function handleEnterKey(e) {
             const activeElement = document.activeElement;
 
-            // ❌ No interferir amb textarea (important pel PDF)
+            // No interferim amb textarea (important pel PDF i altres camps multilinea)
             if (activeElement && activeElement.tagName === 'TEXTAREA') return;
 
-            // 👉 Template modal
             if (isModalOpen('template-modal-container')) {
                 e.preventDefault();
                 confirmTemplateSelection();
                 return;
             }
 
-            // 👉 Export PDF modal
+            if (isModalOpen('save-conversation-modal-container')) {
+                e.preventDefault();
+                downloadConversationJson();
+                return;
+            }
+
             if (isModalOpen('export-modal-container')) {
                 e.preventDefault();
                 exportOrganizerPdf();
                 return;
             }
 
-            // 👉 Item modal
             if (isModalOpen('item-modal-container')) {
                 e.preventDefault();
                 saveItemFromModal();
                 return;
             }
         }
-
         function previewTemplateSelection(key) {
             pendingTemplateKey = key;
             renderTemplateModal();
@@ -5577,6 +5690,113 @@
             updateOrganizerCounts();
             updateBankIndicators();
         };
+
+        function sanitizeFileName(text) {
+            return String(text)
+                .trim()
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+                .slice(0, 80) || 'conversa';
+        }
+
+        function openSaveConversationModal() {
+            const input = document.getElementById('conversation-title');
+            if (input) {
+                input.value = '';
+                input.placeholder = 'Ex. Mediació grup 2n A · abril 2026';
+            }
+
+            document.getElementById('save-conversation-modal-container').style.display = 'flex';
+
+            setTimeout(() => {
+                if (input) input.focus();
+            }, 50);
+        }
+
+        function closeSaveConversationModal() {
+            document.getElementById('save-conversation-modal-container').style.display = 'none';
+        }
+
+        function downloadConversationJson() {
+            const titleInput = document.getElementById('conversation-title');
+            const name = titleInput ? titleInput.value.trim() : '';
+
+            if (!name) {
+                alert('Cal posar un nom a la conversa.');
+                if (titleInput) titleInput.focus();
+                return;
+            }
+
+            const payload = {
+                version: 1,
+                name,
+                savedAt: new Date().toISOString(),
+                app: 'Un Camí',
+                state: getOrganizerState()
+            };
+
+            const json = JSON.stringify(payload, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${sanitizeFileName(name)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            URL.revokeObjectURL(url);
+            closeSaveConversationModal();
+        }
+
+
+        function triggerLoadConversation() {
+            const input = document.getElementById('conversation-file-input');
+            if (!input) return;
+
+            input.value = '';
+            input.click();
+        }
+
+        function handleConversationFileSelected(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function (loadEvent) {
+                try {
+                    const raw = loadEvent.target.result;
+                    const parsed = JSON.parse(raw);
+
+                    const state = parsed && parsed.state ? parsed.state : parsed;
+
+                    if (!state || typeof state !== 'object') {
+                        throw new Error('Fitxer sense estructura vàlida');
+                    }
+
+                    const confirmed = window.confirm('Vols carregar aquesta conversa i substituir el mapa actual?');
+                    if (!confirmed) return;
+
+                    restoreOrganizerState(state);
+                } catch (error) {
+                    console.warn('No s’ha pogut carregar la conversa:', error);
+                    alert('No s’ha pogut carregar aquest fitxer. Comprova que sigui un JSON de conversa vàlid.');
+                }
+            };
+
+            reader.onerror = function () {
+                alert('Hi ha hagut un problema en llegir el fitxer.');
+            };
+
+            reader.readAsText(file, 'utf-8');
+        }
+
+
 
 
     </script>
