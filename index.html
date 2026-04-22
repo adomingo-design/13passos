@@ -848,24 +848,6 @@
     flex-wrap: wrap;
 }
 
-.template-btn {
-    border: 1px solid #cbd5e1;
-    background: white;
-    color: #64748b;
-    border-radius: 999px;
-    padding: 5px 10px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-}
-
-.template-btn:hover {
-    border-color: var(--cep-blue);
-    color: var(--cep-blue);
-    background: #f8fbff;
-}
 
 
         .quadrant-area {
@@ -1050,40 +1032,6 @@
 #btn-need-reshuffle {
     display: none;
 }
-.template-dropdown {
-    position: relative;
-}
-
-.template-menu {
-    position: absolute;
-    top: 110%;
-    right: 0;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    padding: 6px;
-    display: none;
-    min-width: 180px;
-    z-index: 20;
-}
-
-.template-menu.open {
-    display: block;
-}
-
-.template-option {
-    padding: 8px 10px;
-    font-size: 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--cep-grey);
-}
-
-.template-option:hover {
-    background: #f1f5f9;
-    color: var(--cep-black);
-}
 
 .situations-switcher {
     display: flex;
@@ -1256,17 +1204,6 @@
     border-color: var(--cep-red);
     color: var(--cep-red);
 }
-.template-caret {
-    font-size: 0.65rem;
-    margin-left: 6px;
-    opacity: 0.7;
-}
-.template-dropdown.open .template-caret {
-    transform: rotate(180deg);
-}
-.template-caret {
-    transition: transform 0.2s ease;
-}
 .organizer-actions {
     display: flex;
     align-items: center;
@@ -1371,137 +1308,6 @@
     margin-top:10px;
 }
 
-.template-modal-list {
-    display: grid;
-    gap: 18px;
-    margin-top: 18px;
-}
-
-
-.template-group {
-    display: grid;
-    gap: 10px;
-}
-
-.template-modal-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    align-items: start;
-}
-
-.template-group-header {
-    margin-bottom: 14px;
-}
-
-.template-card:hover {
-    border-color: var(--cep-blue);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-}
-
-.template-card.active {
-    border-width: 2px;
-    /*border-color: var(--cep-red);*/
-    background: #fff7f7;
-}
-.template-modal-intro {
-    font-size: 0.86rem;
-    margin-bottom: 16px;
-}
-
-.template-group-column {
-    padding: 14px;
-    border-radius: 20px;
-    background-color: #f1f5f9;
-}
-
-.template-group-title {
-    font-size: 0.9rem;
-    margin: 0 0 3px 0;
-}
-
-.template-group-subtitle {
-    font-size: 0.72rem;
-    line-height: 1.3;
-}
-
-.template-group-list {
-    gap: 8px;
-}
-
-.template-card {
-    padding: 11px 12px;
-    border-radius: 14px;
-    background-color: #fff;
-    margin: 5px;
-    border: 1px solid #575756
-}
-.template-card {
-    border: 1px solid #dbe3ec;
-    border-radius: 16px;
-    background: white;
-    padding: 12px 14px;
-    cursor: pointer;
-    transition: all 0.16s ease;
-}
-.template-card-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.template-check {
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid #94a3b8;
-    border-radius: 4px;
-    background: white;
-    flex: 0 0 16px;
-    position: relative;
-}
-.template-card.active .template-check {
-    border-color: var(--cep-red);
-    background: var(--cep-red);
-}
-
-.template-card.active .template-check::after {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -56%);
-    font-size: 11px;
-    line-height: 1;
-    color: white;
-    font-weight: 700;
-}
-
-.template-card-title {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--cep-black);
-    line-height: 1.2;
-    margin: 0;
-}
-
-
-
-.template-card-desc {
-    font-size: 0.72rem;
-    line-height: 1.32;
-}
-
-
-@media (max-width: 1100px) {
-    .template-modal-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-#template-modal-container .modal-card {
-    max-width: 1100px;
-}
 .drop-note {
     transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
 }
@@ -1562,6 +1368,236 @@
 }
 
 
+
+#template-modal-container .modal-card {
+    max-width: 1320px;
+    width: 100%;
+    height: min(88vh, 760px);
+    padding: 30px 24px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+#template-modal-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.template-modal-intro {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: #64748b;
+    margin-top: -2px;
+    margin-bottom: 12px;
+    max-width: 90ch;
+}
+
+.template-modal-layout {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    align-items: stretch;
+    flex: 1;
+    min-height: 0;
+}
+
+.template-modal-grid {
+    display: contents;
+}
+
+.template-group-column,
+.template-preview-panel {
+    background: #f1f5f9;
+    border-radius: 18px;
+    padding: 12px;
+    min-height: 0;
+}
+
+.template-group-column {
+    overflow: visible;
+}
+
+.template-preview-panel {
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.template-group-header {
+    margin-bottom: 8px;
+}
+
+.template-group-title {
+    font-family: 'Varela Round';
+    font-size: 0.82rem;
+    margin: 0 0 2px 0;
+    color: var(--cep-black);
+}
+
+.template-group-subtitle {
+    font-size: 0.68rem;
+    line-height: 1.25;
+    color: #64748b;
+}
+
+.template-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.template-card {
+    border: 1px solid #dbe3ec;
+    border-radius: 13px;
+    background: white;
+    padding: 10px 11px;
+    cursor: pointer;
+    transition: all 0.16s ease;
+}
+
+.template-card:hover {
+    border-color: var(--cep-blue);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.template-card.active {
+    background: #fff7f7;
+    border-color: var(--cep-red);
+}
+
+.template-card-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.template-check {
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #94a3b8;
+    border-radius: 4px;
+    background: white;
+    flex: 0 0 15px;
+    position: relative;
+}
+
+.template-card.active .template-check {
+    border-color: var(--cep-red);
+    background: var(--cep-red);
+}
+
+.template-card.active .template-check::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -56%);
+    font-size: 10px;
+    line-height: 1;
+    color: white;
+    font-weight: 700;
+}
+
+.template-card-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--cep-black);
+}
+
+.template-preview-header {
+    margin-bottom: 10px;
+}
+
+.template-preview-kicker {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.template-preview-kicker i {
+    color: var(--cep-red);
+    font-size: 0.72rem;
+}
+
+.template-preview-header h4 {
+    margin: 0;
+    font-family: 'Varela Round';
+    font-size: 0.84rem;
+    color: var(--cep-black);
+    line-height: 1.25;
+}
+
+.template-preview-sections {
+    display: grid;
+    gap: 8px;
+}
+
+.template-preview-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 9px 10px;
+}
+
+.template-preview-label {
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.template-preview-text {
+    font-size: 0.72rem;
+    line-height: 1.32;
+    color: var(--cep-grey);
+}
+
+.template-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1180px) {
+    .template-modal-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .template-preview-panel {
+        grid-column: 1 / -1;
+        max-height: 260px;
+    }
+}
+
+@media (max-width: 760px) {
+    .template-modal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .template-preview-panel {
+        grid-column: auto;
+        max-height: 220px;
+    }
+}
     </style>
 </head>
 <body>
@@ -3249,25 +3285,31 @@ El lideratge servei posa el focus en la corresponsabilitat, el compromís i la c
         </div>
     </div>
 
-    <div class="modal-overlay" id="template-modal-container" onclick="closeTemplateModal()">
+   <div class="modal-overlay" id="template-modal-container" onclick="closeTemplateModal()">
     <div class="modal-card" onclick="event.stopPropagation()">
         <button class="modal-close" onclick="closeTemplateModal()">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
         <div id="template-modal-content">
-    <h3>Seleccionar plantilla</h3>
-    <p class="template-modal-intro">
-        Tria una plantilla per carregar les orientacions del mapa.
-    </p>
+            <h3>Seleccionar plantilla</h3>
+            <p class="template-modal-intro">
+                Les plantilles serveixen ens donen pautes per orientar conversa. Pots comparar diferents marcs i valorar quina conversa pot ser més adequada per cada situció.
+            </p>
 
-    <div id="template-modal-grid" class="template-modal-grid"></div>
-</div>
+            <div class="template-modal-layout">
+                <div id="template-modal-grid" class="template-modal-grid"></div>
+                <div id="template-preview-panel" class="template-preview-panel"></div>
+            </div>
 
-
-
+            <div class="template-modal-actions">
+                <button class="mini-action-btn" onclick="closeTemplateModal()">Cancel·lar</button>
+                <button class="mini-action-btn primary-btn" onclick="confirmTemplateSelection()">Aplicar plantilla</button>
+            </div>
+        </div>
     </div>
-</div>
+</div> 
+
 
 
     <div class="modal-overlay" id="item-modal-container" onclick="closeItemModal()">
@@ -3845,8 +3887,8 @@ const facilitatingSituations = [
     group: "Altres"
 },
 ERG: {
-    situacions: "Descriu els fets o moments clau de la situació de manera concreta i ordenada.",
-    emocions: "Recull com s’ha viscut la situació per part de les persones implicades.",
+    situacions: "Descriu els fets o moments clau de la situació de manera concreta i ordenada. Ordenal's en una linea de temps",
+    emocions: "Recull les emocions per part de les persones implicades, pots associar-les a les situacions viscudes.",
     necessitats: "Identifica què necessita cada part per poder avançar, reparar o recuperar seguretat.",
     accions: "Planteja accions que ajudin a reparar, restaurar la relació i donar continuïtat als acords.",
     name: "ERG",
@@ -3930,6 +3972,7 @@ taula_orientacio_professional: {
         let customSituations = [];
         let customActions = [];
         let currentTemplate = 'blank';
+        let pendingTemplateKey = null;
         let situationMode = 'blocking';
 
         let emotionMode = 'covered';
@@ -5002,18 +5045,68 @@ document.querySelectorAll('.cnv-accordion-header').forEach(header => {
 const TEMPLATE_GROUPS = [
     {
         key: "Marcs de treball",
-        subtitle: "Marcs per llegir, ordenar i treballar la conversa"
+        subtitle: "Models standard per orientar converses"
     },
     {
         key: "Taules d'acompanyament",
-        subtitle: "Plantilles específiques d’orientació i seguiment"
+        subtitle: "Pautes per ajudar en el procés d'orientació"
     },
     {
         key: "Altres",
-        subtitle: "Opcions generals o obertes"
+        subtitle: "Opcions obertes o obertes"
     }
 ];
 
+function previewTemplateSelection(key) {
+    pendingTemplateKey = key;
+    renderTemplateModal();
+    renderTemplatePreview();
+}
+function renderTemplatePreview() {
+    const panel = document.getElementById('template-preview-panel');
+    if (!panel) return;
+
+    const key = pendingTemplateKey || currentTemplate;
+    const t = templates[key];
+    if (!t) {
+        panel.innerHTML = '';
+        return;
+    }
+
+panel.innerHTML = `
+    <div class="template-preview-header">
+        <div class="template-preview-kicker">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Plantilla actual: </span>
+            <h4>${escapeHtml(t.name || key)}</h4>
+        </div>
+        
+    </div>
+
+    <div class="template-preview-sections">
+        <div class="template-preview-card">
+            <div class="template-preview-label">Situacions</div>
+            <div class="template-preview-text">${escapeHtml(t.situacions || '')}</div>
+        </div>
+
+        <div class="template-preview-card">
+            <div class="template-preview-label">Emocions</div>
+            <div class="template-preview-text">${escapeHtml(t.emocions || '')}</div>
+        </div>
+
+        <div class="template-preview-card">
+            <div class="template-preview-label">Necessitats</div>
+            <div class="template-preview-text">${escapeHtml(t.necessitats || '')}</div>
+        </div>
+
+        <div class="template-preview-card">
+            <div class="template-preview-label">Accions</div>
+            <div class="template-preview-text">${escapeHtml(t.accions || '')}</div>
+        </div>
+    </div>
+`;
+
+}
 function renderTemplateModal() {
     const container = document.getElementById('template-modal-grid');
     if (!container) return;
@@ -5026,6 +5119,8 @@ function renderTemplateModal() {
         if (!grouped[group]) grouped[group] = [];
         grouped[group].push(key);
     });
+
+    const selectedKey = pendingTemplateKey || currentTemplate;
 
     container.innerHTML = TEMPLATE_GROUPS.map(group => {
         const items = grouped[group.key] || [];
@@ -5040,16 +5135,16 @@ function renderTemplateModal() {
                 <div class="template-group-list">
                     ${items.map(key => {
                         const t = templates[key];
-                        const active = currentTemplate === key ? 'active' : '';
+                        const active = selectedKey === key ? 'active' : '';
                         return `
-    <article class="template-card ${active}"
-             onclick="selectTemplateFromModal('${key}')">
-        <div class="template-card-head">
-            <span class="template-check" aria-hidden="true"></span>
-            <div class="template-card-title">${escapeHtml(t.name || key)}</div>
-        </div>
-    </article>
-`;
+                            <article class="template-card ${active}"
+                                     onclick="previewTemplateSelection('${key}')">
+                                <div class="template-card-head">
+                                    <span class="template-check" aria-hidden="true"></span>
+                                    <div class="template-card-title">${escapeHtml(t.name || key)}</div>
+                                </div>
+                            </article>
+                        `;
                     }).join('')}
                 </div>
             </section>
@@ -5057,15 +5152,25 @@ function renderTemplateModal() {
     }).join('');
 }
 
-
-
 function openTemplateModal() {
-    renderTemplateModal();
+    pendingTemplateKey = currentTemplate;
     document.getElementById('template-modal-container').style.display = 'flex';
+    renderTemplateModal();
+    renderTemplatePreview();
 }
 
 function closeTemplateModal() {
+    pendingTemplateKey = null;
     document.getElementById('template-modal-container').style.display = 'none';
+}
+
+function confirmTemplateSelection() {
+    const key = pendingTemplateKey || currentTemplate;
+    if (!key) return;
+
+    applyTemplate(key);
+    closeTemplateModal();
+    setTimeout(revealHints, 150);
 }
 
 function selectTemplateFromModal(key) {
