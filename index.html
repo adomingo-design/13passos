@@ -12,6 +12,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <link rel="icon" type="image/png" href="./mosca.png">
+
     <style>
         :root {
             --cep-red: #D8262E;
@@ -1935,7 +1937,7 @@
 
 
                         <!-- input ocult per carregar fitxers -->
-                        <input type="file" id="conversation-file-input" accept=".json,application/json"
+                        <input type="file" id="conversation-file-input" accept=".13E,application/json"
                             style="display:none" onchange="handleConversationFileSelected(event)">
 
                     </div>
@@ -5744,7 +5746,7 @@
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${sanitizeFileName(name)}.json`;
+            a.download = `${sanitizeFileName(name)}.13E`;
             document.body.appendChild(a);
             a.click();
             a.remove();
